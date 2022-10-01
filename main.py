@@ -56,17 +56,15 @@ async def discussion (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
 async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
-    await update.message.reply_photo(
-        open('P-1-1.png', 'rb')
+    chat_id = update.message.chat.id
+
+    await context.bot.send_photo(
+        update.message.chat.id, open('P-1-1.png', 'rb')
     )
 
-    await update.message.reply_photo(
-        open('P-1-2.png', 'rb')
-    )
+    context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
 
-    await update.message.reply_photo(
-        open('P-1-3.png', 'rb')
-    )
+    context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 1
 
@@ -81,16 +79,16 @@ async def question_1_answer_right(update: Update, context: ContextTypes.DEFAULT_
     logger.info("Answer of %s: %s", user.first_name, update.message.text)
     cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
     db.commit()
-    await update.message.reply_photo(
-        open('S-1-1.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('S-1-1.png', 'rb')
     )
 
-    await update.message.reply_photo(
-        open('P-2-1.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('P-2-1.png', 'rb')
     )
 
-    await update.message.reply_photo(
-        open('P-2-2.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('P-2-2.png', 'rb')
     )
 
     await update.message.reply_photo(
@@ -110,24 +108,24 @@ async def question_1_answer_wrong(update: Update, context: ContextTypes.DEFAULT_
     cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
     db.commit()
 
-    await update.message.reply_photo(
-        open('S-1-2.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('S-1-2.png', 'rb')
     )
 
-    await update.message.reply_photo(
-        open('S-1-3.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('S-1-3.png', 'rb')
     )
 
-    await update.message.reply_photo(
-        open('P-2-1.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('P-2-1.png', 'rb')
     )
 
-    await update.message.reply_photo(
-        open('P-2-2.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('P-2-2.png', 'rb')
     )
 
-    await update.message.reply_photo(
-        open('P-1-3.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('P-1-3.png', 'rb')
     )
 
     context.user_data["question_id"] = 2
@@ -143,8 +141,8 @@ async def question_2_answer_right(update: Update, context: ContextTypes.DEFAULT_
     cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
     db.commit()
 
-    await update.message.reply_photo(
-        open('S-1-1.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('S-1-1.png', 'rb')
     )
 
     return QUESTION_3
@@ -158,8 +156,8 @@ async def question_2_answer_wrong(update: Update, context: ContextTypes.DEFAULT_
     cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
     db.commit()
 
-    await update.message.reply_photo(
-        open('S-2-2.png', 'rb')
+    await context.bot.send_photo(
+        update.message.chat.id, open('S-2-2.png', 'rb')
     )
 
     return QUESTION_3
@@ -168,16 +166,28 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancels and ends the conversation."""
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    await update.message.reply_text(
+    await context.bot.send_photo(
         "Bye! I hope we can talk again some day.", reply_markup=ReplyKeyboardRemove()
     )
 
     return ConversationHandler.END
 
+def remove_job_if_exists(name: str, context: ContextTypes.DEFAULT_TYPE) -> bool:
+    """Remove job with given name. Returns whether job was removed."""
+    current_jobs = context.job_queue.get_jobs_by_name(name)
+    if not current_jobs:
+        return False
+    for job in current_jobs:
+        job.schedule_removal()
+    return True
+
+async def callback_second(context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_photo(chat_id=context.job.chat_id, photo=context.job.data)
+
 if __name__ == '__main__':
     load_dotenv()
     application = Application.builder().token(os.environ.get('telegram-bot-token')).build()
-    
+
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", question_1)],
