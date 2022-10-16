@@ -160,6 +160,10 @@ async def question_2_answer_wrong(update: Update, context: ContextTypes.DEFAULT_
         update.message.chat.id, open('S-2-2.png', 'rb')
     )
 
+    await context.bot.send_message(
+        update.message.chat.id, text="stop"
+    )
+
     return QUESTION_3
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
