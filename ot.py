@@ -40,7 +40,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # QUESTION 1 : 1 / QUESTION 2 : 4 / QUESTION 3 : 7 / QUESTION 4 : 10 / QUESTION 5 : 13
-START, QUESTION_1, QUESTION_1_ADDED, QUESTION_2, QUESTION_2_ADDED, QUESTION_3, QUESTION_3_ADDED, QUESTION_4, QUESTION_4_ADDED, QUESTION_5, QUESTION_5_ADDED, QUESTION_6, QUESTION_6_ADDED, QUESTION_7, QUESTION_7_ADDED, QUESTION_8, QUESTION_8_ADDED, QUESTION_9, QUESTION_9_ADDED, QUESTION_10, QUESTION_10_ADDED = range(21)
+START, QUESTION_1, QUESTION_1_ADDED, QUESTION_2, QUESTION_2_ADDED, QUESTION_3, QUESTION_3_ADDED, QUESTION_4, QUESTION_4_ADDED, QUESTION_5, QUESTION_5_ADDED = range(11)
 
 async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
@@ -66,7 +66,7 @@ async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     chat_id = update.message.chat.id
 
     await context.bot.send_message(
-        chat_id=chat_id, text="안녕 반가워! 나는 오늘 너와 함께 공부할 챗봇이야.\n내가 문제 10개를 풀었는데, 내 답이 맞았는지 틀렸는지에 대해 조언을 부탁할게!"
+        chat_id=chat_id, text="안녕 반가워! 나는 오늘 너와 함께 공부할 챗봇이야.\n내가 문제 5개를 풀었는데, 내 답이 맞았는지 틀렸는지에 대해 조언을 부탁할게!"
     )
 
     start_button = [[KeyboardButton('준비됐어')]]
@@ -91,7 +91,7 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     )
 
     await context.bot.send_photo(
-        update.message.chat.id, open('c1.png', 'rb')
+        update.message.chat.id, open('ot1.png', 'rb')
     )
 
     ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
@@ -99,7 +99,7 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 16×14÷2야.\n\n내가 구한 답이 맞니?",
+        text="내가 구한 답은 18900÷21이야.\n\n내가 구한 답이 맞니?",
         reply_markup=reply_markup
     )
 
@@ -163,7 +163,7 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     )
 
     await context.bot.send_photo(
-        update.message.chat.id, open('c2.png', 'rb')
+        update.message.chat.id, open('ot2.png', 'rb')
     )
 
     ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
@@ -171,7 +171,7 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, (90×60)÷2가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="답을 구해보니, (15+20+10+15)÷3이 나왔어.\n\n내가 구한 게 정답이니?",
         reply_markup=reply_markup
     )
 
@@ -234,7 +234,7 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     )
 
     await context.bot.send_photo(
-        update.message.chat.id, open('c3.png', 'rb')
+        update.message.chat.id, open('ot3.png', 'rb')
     )
 
     ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
@@ -242,7 +242,7 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답은 (200+60)×140÷2야.\n\n내가 구한 답 맞았니?",
+        text="내 답은 (43+45+35+40+33+51+40)÷7이야.\n\n내가 구한 답 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -305,7 +305,7 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     )
 
     await context.bot.send_photo(
-        update.message.chat.id, open('c4.png', 'rb')
+        update.message.chat.id, open('ot4.png', 'rb')
     )
 
     ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
@@ -313,7 +313,7 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 15×8이라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 (5+4+2+1)÷4라고 생각해.\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
 
@@ -376,7 +376,7 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     )
 
     await context.bot.send_photo(
-        update.message.chat.id, open('c5.png', 'rb')
+        update.message.chat.id, open('ot5.png', 'rb')
     )
 
     ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
@@ -384,7 +384,7 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 400×630야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 480+6이야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -437,363 +437,6 @@ async def question_5_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     return QUESTION_5_ADDED
 
-
-async def question_6 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
-    chat_id = update.message.chat.id
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text='그렇구나! 다음은 6번 문제야!',
-    )
-
-    await context.bot.send_photo(
-        update.message.chat.id, open('c6.png', 'rb')
-    )
-
-    ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
-    reply_markup = ReplyKeyboardMarkup(ox_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내가 구한 답은 7×9야.\n\n내가 구한 답이 맞니?",
-        reply_markup=reply_markup
-    )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
-    context.user_data["question_id"] = 6
-
-    return QUESTION_6
-
-
-async def question_6_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_6_ADDED
-
-async def question_6_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_6_ADDED
-
-async def question_7 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
-    chat_id = update.message.chat.id
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text='그렇구나! 다음은 7번 문제야!',
-    )
-
-    await context.bot.send_photo(
-        update.message.chat.id, open('c7.png', 'rb')
-    )
-
-    ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
-    reply_markup = ReplyKeyboardMarkup(ox_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="답을 구해보니, 18×18÷2가 나왔어.\n\n내가 구한 게 정답이니?",
-        reply_markup=reply_markup
-    )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
-    context.user_data["question_id"] = 7
-
-    return QUESTION_7
-
-async def question_7_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_7_ADDED
-
-async def question_7_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_7_ADDED
-
-async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
-    chat_id = update.message.chat.id
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text='그렇구나! 다음은 8번 문제야!',
-    )
-
-    await context.bot.send_photo(
-        update.message.chat.id, open('c8.png', 'rb')
-    )
-
-    ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
-    reply_markup = ReplyKeyboardMarkup(ox_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내가 생각한 답은 40×50이야.\n\n내가 구한 답 맞았니?",
-        reply_markup=reply_markup
-    )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
-    context.user_data["question_id"] = 8
-
-    return QUESTION_8
-
-async def question_8_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_8_ADDED
-
-async def question_8_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_8_ADDED
-
-async def question_9 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
-    chat_id = update.message.chat.id
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text='그렇구나! 다음은 9번 문제야!',
-    )
-
-    await context.bot.send_photo(
-        update.message.chat.id, open('c9.png', 'rb')
-    )
-
-    ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
-    reply_markup = ReplyKeyboardMarkup(ox_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="나는 답이 35×35라고 생각해.\n\n내 답이 맞을까?",
-        reply_markup=reply_markup
-    )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
-    context.user_data["question_id"] = 9
-
-    return QUESTION_9
-
-async def question_9_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_9_ADDED
-
-async def question_9_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_9_ADDED
-
-async def question_10 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
-    chat_id = update.message.chat.id
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text='그렇구나! 다음은 10번 문제야!',
-    )
-
-    await context.bot.send_photo(
-        update.message.chat.id, open('c10.png', 'rb')
-    )
-
-    ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
-    reply_markup = ReplyKeyboardMarkup(ox_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내가 생각한 답은 (15+9)×7÷2야.\n\n내가 구한 게 맞았니?",
-        reply_markup=reply_markup
-    )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
-    context.user_data["question_id"] = 10
-
-    return QUESTION_10
-
-async def question_10_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_10_ADDED
-
-async def question_10_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Stores the selected gender and asks for a photo."""
-    user = update.message.from_user
-    chat_id = update.message.chat.id
-
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
-
-    submit_button = [[KeyboardButton('설명 끝내기')]]
-    reply_markup = ReplyKeyboardMarkup(submit_button, one_time_keyboard=True)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return QUESTION_10_ADDED
-
 async def end (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
     chat_id = update.message.chat.id
@@ -819,13 +462,22 @@ async def warning(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
     return callback_number
 
-
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
 
     return ConversationHandler.END
+
 """
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.message.from_user
+    logger.info("User %s canceled the conversation.", user.first_name)
+    await context.bot.send_photo(
+        "Bye! I hope we can talk again some day.", reply_markup=ReplyKeyboardRemove()
+    )
+
+    return ConversationHandler.END
+
 def remove_job_if_exists(name: str, context: ContextTypes.DEFAULT_TYPE) -> bool:
     # Remove job with given name. Returns whether job was removed.
     current_jobs = context.job_queue.get_jobs_by_name(name)
@@ -841,14 +493,14 @@ async def callback_second(context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     load_dotenv()
-    application = Application.builder().token(os.environ.get('telegram-bot-token')).build()
+    application = Application.builder().token(os.environ.get('telegram-bot-token-ot')).build()
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
             START: [
-                # MessageHandler(filters.Regex("^[^준비됐어]"), warning),
+                # MessageHandler(filters.Regex("[^\b준비됐어\b]"), warning),
                 MessageHandler(filters.Regex("^\s*준비됐어\s*"), question_1)
             ],
             QUESTION_1: [
@@ -857,7 +509,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_1_answer_x)
             ],
             QUESTION_1_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
+                MessageHandler(filters.Regex("[^\b설명 끝내기\b]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_2),
             ],
             QUESTION_2: [
@@ -866,7 +518,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_2_answer_x)
             ],
             QUESTION_2_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
+                MessageHandler(filters.Regex("[^\b설명 끝내기\b]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_3),
             ],
             QUESTION_3: [
@@ -875,7 +527,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_3_answer_x)
             ],
             QUESTION_3_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
+                MessageHandler(filters.Regex("[^\b설명 끝내기\b]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_4),
             ],
             QUESTION_4: [
@@ -884,7 +536,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_4_answer_x)
             ],
             QUESTION_4_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
+                MessageHandler(filters.Regex("[^\b설명 끝내기\b]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_5),
             ],
             QUESTION_5: [
@@ -893,54 +545,9 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_5_answer_x)
             ],
             QUESTION_5_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
-                MessageHandler(filters.Regex("^설명 끝내기"), question_6),
-            ],
-            QUESTION_6: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
-                MessageHandler(filters.Regex("^\s*맞아\s*"), question_6_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_6_answer_x)
-            ],
-            QUESTION_6_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
-                MessageHandler(filters.Regex("^설명 끝내기"), question_7),
-            ],
-            QUESTION_7: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
-                MessageHandler(filters.Regex("^\s*맞아\s*"), question_7_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_7_answer_x)
-            ],
-            QUESTION_7_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
-                MessageHandler(filters.Regex("^설명 끝내기"), question_8),
-            ],
-            QUESTION_8: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
-                MessageHandler(filters.Regex("^\s*맞아\s*"), question_8_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_8_answer_x)
-            ],
-            QUESTION_8_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
-                MessageHandler(filters.Regex("^설명 끝내기"), question_9),
-            ],
-            QUESTION_9: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
-                MessageHandler(filters.Regex("^\s*맞아\s*"), question_9_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_9_answer_x)
-            ],
-            QUESTION_9_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
-                MessageHandler(filters.Regex("^설명 끝내기"), question_10),
-            ],
-            QUESTION_10: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
-                MessageHandler(filters.Regex("^\s*맞아\s*"), question_10_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_10_answer_x)
-            ],
-            QUESTION_10_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
+                MessageHandler(filters.Regex("[^\b설명 끝내기\b]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), end),
-            ]
+            ],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
