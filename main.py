@@ -18,7 +18,7 @@ if __version_info__ < (20, 0, 0, "alpha", 1):
         f"{TG_VER} version of this example, "
         f"visit https://docs.python-telegram-bot.org/en/v{TG_VER}/examples.html"
     )
-from telegram import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram import KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -39,7 +39,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# QUESTION 1 : 1 / QUESTION 2 : 4 / QUESTION 3 : 7 / QUESTION 4 : 10 / QUESTION 5 : 13
+# QUESTION 1 : 1 / QUESTION 2 : 3 / QUESTION 3 : 5 / QUESTION 4 : 7 / QUESTION 5 : 9
 START, QUESTION_1, QUESTION_1_ADDED, QUESTION_2, QUESTION_2_ADDED, QUESTION_3, QUESTION_3_ADDED, QUESTION_4, QUESTION_4_ADDED, QUESTION_5, QUESTION_5_ADDED, QUESTION_6, QUESTION_6_ADDED, QUESTION_7, QUESTION_7_ADDED, QUESTION_8, QUESTION_8_ADDED, QUESTION_9, QUESTION_9_ADDED, QUESTION_10, QUESTION_10_ADDED = range(21)
 
 async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -60,6 +60,16 @@ async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         return QUESTION_4_ADDED
     elif context.user_data["question_id"] == 5:
         return QUESTION_5_ADDED
+    elif context.user_data["question_id"] == 6:
+        return QUESTION_6_ADDED
+    elif context.user_data["question_id"] == 7:
+        return QUESTION_7_ADDED
+    elif context.user_data["question_id"] == 8:
+        return QUESTION_8_ADDED
+    elif context.user_data["question_id"] == 9:
+        return QUESTION_9_ADDED
+    elif context.user_data["question_id"] == 10:
+        return QUESTION_10_ADDED
 
 async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
@@ -94,13 +104,13 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         update.message.chat.id, open('c1.png', 'rb')
     )
 
-    ox_button = [[KeyboardButton('맞아')], [KeyboardButton('틀렸어')]]
-    reply_markup = ReplyKeyboardMarkup(ox_button, one_time_keyboard=True)
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아'), InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
 
     await context.bot.send_message(
         chat_id=chat_id,
         text="내가 구한 답은 16×14÷2야.\n\n내가 구한 답이 맞니?",
-        reply_markup=reply_markup
+        reply_markup= reply_markup
     )
 
     # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
@@ -126,7 +136,7 @@ async def question_1_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -147,7 +157,7 @@ async def question_1_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -197,7 +207,7 @@ async def question_2_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -218,7 +228,7 @@ async def question_2_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -268,7 +278,7 @@ async def question_3_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -289,7 +299,7 @@ async def question_3_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -339,7 +349,7 @@ async def question_4_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -360,7 +370,7 @@ async def question_4_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -410,7 +420,7 @@ async def question_5_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -431,7 +441,7 @@ async def question_5_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -483,7 +493,7 @@ async def question_6_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -504,7 +514,7 @@ async def question_6_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -554,7 +564,7 @@ async def question_7_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -575,7 +585,7 @@ async def question_7_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -625,7 +635,7 @@ async def question_8_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -646,7 +656,7 @@ async def question_8_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -696,7 +706,7 @@ async def question_9_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -717,7 +727,7 @@ async def question_9_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -767,7 +777,7 @@ async def question_10_answer_o(update: Update, context: ContextTypes.DEFAULT_TYP
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 맞았구나!\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -788,7 +798,7 @@ async def question_10_answer_x(update: Update, context: ContextTypes.DEFAULT_TYP
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n혹시 내가 구한 답에 더 설명해줄 게 있으면 말해줄래?",
+        text="내 답이 틀렸구나ㅠㅠ\n혹시 나에게 더 설명해주고 싶은 게 있으면 말해줄래?",
         reply_markup=reply_markup
     )
 
@@ -841,105 +851,106 @@ async def callback_second(context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     load_dotenv()
-    application = Application.builder().token(os.environ.get('telegram-bot-token')).build()
+    application = Application.builder().token(os.environ.get('')).build()
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
             START: [
-                # MessageHandler(filters.Regex("^[^준비됐어]"), warning),
-                MessageHandler(filters.Regex("^\s*준비됐어\s*"), question_1)
+                MessageHandler(filters.Regex("^\s*준비됐어\s*"), question_1),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_1_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_1_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_1_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_2),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_2: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_2_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_2_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_2_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_2_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_3),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_3: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_3_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_3_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_3_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_3_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_4),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_4: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_4_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_4_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_4_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_4_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_5),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_5: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_5_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_5_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_5_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_5_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_6),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_6: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_6_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_6_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_6_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_6_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_7),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_7: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_7_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_7_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_7_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+
             ],
             QUESTION_7_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_8),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_8: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_8_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_8_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_8_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_8_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_9),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_9: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_9_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_9_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_9_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_9_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), question_10),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_10: [
-                # MessageHandler(filters.Regex("^[^(맞아|틀렸어)]"), warning),
                 MessageHandler(filters.Regex("^\s*맞아\s*"), question_10_answer_o),
-                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_10_answer_x)
+                MessageHandler(filters.Regex("^\s*틀렸어\s*"), question_10_answer_x),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_10_ADDED: [
-                MessageHandler(filters.Regex("^[^설명 끝내기]"), explanation),
                 MessageHandler(filters.Regex("^설명 끝내기"), end),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ]
         },
         fallbacks=[CommandHandler("cancel", cancel)],
