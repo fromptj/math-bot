@@ -44,11 +44,12 @@ logger = logging.getLogger(__name__)
 START, QUESTION_1, QUESTION_1_ADDED, QUESTION_2, QUESTION_2_ADDED, QUESTION_3, QUESTION_3_ADDED, QUESTION_4, QUESTION_4_ADDED, QUESTION_5, QUESTION_5_ADDED = range(11)
 
 async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    user = update.callback_query.from_user
-    args = (update.message.chat.id, context.user_data["question_id"], user.first_name, update.message.text)
+    user = update.message.from_user
+    chat_id = update.message.chat.id
 
-    logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
+    args = (chat_id, "ot", context.user_data["question_id"], user.id, update.message.text)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, cond, question_id, user_id, explanation) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
     if context.user_data["question_id"] == 1:
@@ -64,6 +65,13 @@ async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
 async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
+    '''
+    cursor.execute('SELECT question_id FROM messages GROUP BY user_id ORDER BY created_at DESC limit 1');
+    record = cursor.fetchall()
+    print(record[0][0])
+    print(type(record[0][0]))
+    question_id_checker = record[0][0] if record else 6
+    '''
     chat_id = update.message.chat.id
 
     await context.bot.send_message(
@@ -79,11 +87,11 @@ async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         text='공부할 준비가 되면 아래 보이는 <준비됐어> 버튼을 눌러줘!',
         reply_markup=reply_markup
     )
-
     return START
 
 async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
+    # update.callback_query.edit_message_reply_markup(None)
     chat_id = update.callback_query.message.chat.id
 
     await context.bot.send_message(
@@ -117,12 +125,12 @@ async def question_1_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 1, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -138,12 +146,12 @@ async def question_1_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 1, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -188,12 +196,12 @@ async def question_2_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 2, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -209,12 +217,12 @@ async def question_2_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 2, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -259,12 +267,12 @@ async def question_3_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 3, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -280,12 +288,12 @@ async def question_3_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 3, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -330,12 +338,12 @@ async def question_4_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 4, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -351,12 +359,12 @@ async def question_4_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 4, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -401,12 +409,12 @@ async def question_5_answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 5, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -422,12 +430,12 @@ async def question_5_answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    #args = (update.message.chat.id, 1, user.first_name, update.message.text)
-    #logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    #cursor.execute('INSERT INTO messages (chat_id, question_id, username, body) VALUES (%s, %s, %s, %s)', args)
-    #db.commit()
+    args = (chat_id, update.callback_query.data, "ot", 5, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
-    submit_button = [[InlineKeyboardButton('제출하기',  callback_data='제출하기')]]
+    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
@@ -450,7 +458,7 @@ async def end (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 async def warning(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
-    chat_id = update.callback_query.message.chat.id
+    chat_id = update.message.chat.id
 
     if not context.user_data:
         context.user_data["question_id"] = 1
@@ -504,54 +512,54 @@ if __name__ == '__main__':
         states={
             START: [
                 CallbackQueryHandler(question_1, pattern="^\s*준비됐어\s*"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
                 # MessageHandler(filters.Regex("^\s*준비됐어\s*"), question_1),
                 #MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1: [
                 CallbackQueryHandler(question_1_answer_o, pattern="^\s*맞아\s*"),
                 CallbackQueryHandler(question_1_answer_x, pattern="^\s*틀렸어\s*"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1_ADDED: [
-                CallbackQueryHandler(question_2, pattern="^제출하기"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                CallbackQueryHandler(question_2, pattern="^설명 마치기"),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_2: [
                 CallbackQueryHandler(question_2_answer_o, pattern="^\s*맞아\s*"),
                 CallbackQueryHandler(question_2_answer_x, pattern="^\s*틀렸어\s*"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_2_ADDED: [
-                CallbackQueryHandler(question_3, pattern="^제출하기"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                CallbackQueryHandler(question_3, pattern="^설명 마치기"),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_3: [
                 CallbackQueryHandler(question_3_answer_o, pattern="^\s*맞아\s*"),
                 CallbackQueryHandler(question_3_answer_x, pattern="^\s*틀렸어\s*"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_3_ADDED: [
-                CallbackQueryHandler(question_4, pattern="^제출하기"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                CallbackQueryHandler(question_4, pattern="^설명 마치기"),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_4: [
                 CallbackQueryHandler(question_4_answer_o, pattern="^\s*맞아\s*"),
                 CallbackQueryHandler(question_4_answer_x, pattern="^\s*틀렸어\s*"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_4_ADDED: [
-                CallbackQueryHandler(question_5, pattern="^제출하기"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                CallbackQueryHandler(question_5, pattern="^설명 마치기"),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_5: [
                 CallbackQueryHandler(question_5_answer_o, pattern="^\s*맞아\s*"),
                 CallbackQueryHandler(question_5_answer_x, pattern="^\s*틀렸어\s*"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_5_ADDED: [
-                CallbackQueryHandler(end, pattern="^제출하기"),
-                CallbackQueryHandler(warning, pattern="^[^/cancel]"),
+                CallbackQueryHandler(end, pattern="^설명 마치기"),
+                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
