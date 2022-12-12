@@ -473,7 +473,7 @@ async def warning(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
-    user = update.callback_query.from_user
+    user = update.message.from_user
 
     logger.info("User %s canceled the conversation.", user.first_name)
 
