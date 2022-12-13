@@ -62,7 +62,7 @@ async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     chat_id = update.message.chat.id
 
     await context.bot.send_message(
-        chat_id=chat_id, text="안녕 반가워! 나는 오늘 너와 함께 공부할 챗봇이야.\n내가 문제 10개를 풀었는데, 내 답이 맞았는지 틀렸는지에 대해 조언을 부탁할게!"
+        chat_id=chat_id, text="안녕 반가워! 나는 오늘 너와 함께 공부할 챗봇이야.\n내가 문제 15개를 풀었는데, 내 답이 맞았는지 틀렸는지에 대해 조언을 부탁할게!"
     )
 
     start_button = [[InlineKeyboardButton('준비됐어', callback_data='준비됐어')]]
@@ -1108,7 +1108,7 @@ async def question_15_answer_o(update: Update, context: ContextTypes.DEFAULT_TYP
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    args = (chat_id, update.callback_query.data, "lc", 15, user.id)
+    args = (chat_id, update.callback_query.data, "la", 15, user.id)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
@@ -1129,7 +1129,7 @@ async def question_15_answer_x(update: Update, context: ContextTypes.DEFAULT_TYP
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
 
-    args = (chat_id, update.callback_query.data, "lc", 15, user.id)
+    args = (chat_id, update.callback_query.data, "la", 15, user.id)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
