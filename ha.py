@@ -1291,7 +1291,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_10_ADDED: [
-                CallbackQueryHandler(end, pattern="^설명 마치기"),
+                CallbackQueryHandler(question_11, pattern="^설명 마치기"),
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_11: [
