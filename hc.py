@@ -1,7 +1,5 @@
 import logging
 import pymysql
-import re
-import pathlib
 from dotenv import load_dotenv
 import os
 
