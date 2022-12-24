@@ -104,9 +104,6 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         reply_markup= reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 1
 
     return QUESTION_1
@@ -132,9 +129,6 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         text="답을 구해보니, (90+60)÷2가 나왔어.\n\n내가 구한 게 정답이니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 2
 
@@ -162,9 +156,6 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 3
 
     return QUESTION_3
@@ -190,9 +181,6 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         text="나는 답이 15×8이라고 생각해.\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 4
 
@@ -220,9 +208,6 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 5
 
     return QUESTION_5
@@ -248,9 +233,6 @@ async def question_6 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         text="내가 구한 답은 7×9야.\n\n내가 구한 답이 맞니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 6
 
@@ -278,9 +260,6 @@ async def question_7 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 7
 
     return QUESTION_7
@@ -306,9 +285,6 @@ async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         text="내가 생각한 답은 40×50이야.\n\n내가 구한 답이 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 8
 
@@ -336,9 +312,6 @@ async def question_9 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 9
 
     return QUESTION_9
@@ -364,9 +337,6 @@ async def question_10 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="내가 생각한 답은 (15+7)×9÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 10
 
@@ -394,9 +364,6 @@ async def question_11 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 11
 
     return QUESTION_11
@@ -422,9 +389,6 @@ async def question_12 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="답을 구해보니, (7+12)÷2가 나왔어.\n\n내가 구한 게 정답이니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 12
 
@@ -452,9 +416,6 @@ async def question_13 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 13
 
     return QUESTION_13
@@ -480,9 +441,6 @@ async def question_14 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="나는 답이 (5+15)×6÷2라고 생각해.\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 14
 
@@ -510,9 +468,6 @@ async def question_15 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 15
 
     return QUESTION_15
@@ -538,9 +493,6 @@ async def question_16 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="내가 구한 답은 (4+24)×15÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 16
 
@@ -568,9 +520,6 @@ async def question_17 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 17
 
     return QUESTION_17
@@ -596,9 +545,6 @@ async def question_18 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="내 답은 7+4야.\n\n내가 구한 답이 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 18
 
@@ -626,9 +572,6 @@ async def question_19 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 19
 
     return QUESTION_19
@@ -654,9 +597,6 @@ async def question_20 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="내가 생각한 답은 16×20÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 20
 
@@ -684,9 +624,6 @@ async def question_21 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 21
 
     return QUESTION_12
@@ -712,9 +649,6 @@ async def question_22 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="답을 구해보니, 25×16÷2가 나왔어.\n\n내가 구한 게 정답이니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 22
 
@@ -742,9 +676,6 @@ async def question_23 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 23
 
     return QUESTION_23
@@ -770,9 +701,6 @@ async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="나는 답이 180×90÷2라고 생각해.\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 24
 
@@ -800,9 +728,6 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 25
 
     return QUESTION_25
@@ -828,9 +753,6 @@ async def question_26 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="내가 생각한 답은 11x11야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 26
 
@@ -858,9 +780,6 @@ async def question_27 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 27
 
     return QUESTION_27
@@ -886,9 +805,6 @@ async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="내가 생각한 답은 25×15÷2야.\n\n내가 구한 답 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 28
 
@@ -916,9 +832,6 @@ async def question_29 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         reply_markup=reply_markup
     )
 
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
-
     context.user_data["question_id"] = 29
 
     return QUESTION_29
@@ -944,9 +857,6 @@ async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         text="내가 생각한 답은 (6+16)×5÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
-
-    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
-    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
     context.user_data["question_id"] = 30
 
