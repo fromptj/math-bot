@@ -962,12 +962,16 @@ async def answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
+    answer_text = ["내가 맞았구나!ㅎㅎ 답을 구하는 과정을 설명해줄 수 있니?",
+                   "내 답이 맞았다니 다행이야. 답을 구하는 과정은 어떻게 되니?",
+                   "내가 맞게 풀었구나!! 어떻게 답을 구하는지 한 번 설명해줄래?"]
+
     submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n어떻게 답이 나왔는지 설명해줄래?",
+        text=answer_text[question_id % 3], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
         reply_markup=reply_markup
     )
 
@@ -983,12 +987,16 @@ async def answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
+    answer_text = ["내 답이 틀렸구나ㅠㅠ 그럼 답을 구하는 과정을 설명해줄래?",
+                   "앗 내가 틀렸구나ㅠㅠ 답을 구하는 과정은 어떻게 되니?",
+                  "내가 잘못 풀었구나ㅠ 어떻게 답을 구할 수 있는지 설명해줄래?"]
+
     submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n왜 틀렸는지 설명해줄래?",
+        text=answer_text[question_id % 3], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
         reply_markup=reply_markup
     )
 
