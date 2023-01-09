@@ -690,7 +690,7 @@ async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     )
 
     await context.bot.send_photo(
-        chat_id, open('c24.png', 'rb')
+        chat_id, open('c25.png', 'rb')
     )
 
     ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
@@ -716,7 +716,7 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     )
 
     await context.bot.send_photo(
-        chat_id, open('c25.png', 'rb')
+        chat_id, open('c24.png', 'rb')
     )
 
     ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]

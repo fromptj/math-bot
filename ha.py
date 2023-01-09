@@ -158,7 +158,7 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답은 (200+60)×140÷2야.\n\n내가 구한 답이 맞았니?",
+        text="내 답은 (140+60)×200÷2야.\n\n내가 구한 답이 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -216,7 +216,7 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 400×630이야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 400×630÷2이야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -303,7 +303,7 @@ async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 40×50이야.\n\n내가 구한 답이 맞았니?",
+        text="내가 생각한 답은 40×50÷2이야.\n\n내가 구한 답이 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -448,7 +448,7 @@ async def question_13 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 30×60이야.\n\n내가 구한 답 맞았니?",
+        text="내가 생각한 답은 30×80이야.\n\n내가 구한 답 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -593,7 +593,7 @@ async def question_18 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답은 7+4야.\n\n내가 구한 답이 맞았니?",
+        text="내 답은 7×4야.\n\n내가 구한 답이 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -738,7 +738,7 @@ async def question_23 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 13×10÷2야.\n\n내가 구한 답이 맞았니?",
+        text="내가 생각한 답은 24×10÷2야.\n\n내가 구한 답이 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -767,7 +767,7 @@ async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 180×90÷2라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 6×12라고 생각해.\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
 
@@ -796,7 +796,7 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 6×12야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 150×90÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -883,7 +883,7 @@ async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 25×15÷2야.\n\n내가 구한 답 맞았니?",
+        text="내가 생각한 답은 20×15÷2야.\n\n내가 구한 답 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -962,12 +962,17 @@ async def answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
+    answer_text = ["내가 맞았구나!🥳 답을 구하는 과정을 설명해줄 수 있니?",
+                   "와 맞았다!!😆 답을 구하는 과정을 설명해줄래?",
+                   "내 답이 맞다니 다행이야😉 답을 구하는 과정은 어떻게 되니?",
+                   "내가 맞았구나🤩 어떻게 답을 구하는지 한 번 설명해줄래?"]
+
     submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n어떻게 답이 나왔는지 설명해줄래?",
+        text=answer_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
         reply_markup=reply_markup
     )
 
@@ -983,12 +988,17 @@ async def answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
+    answer_text = ["내 답이 틀렸구나ㅠㅠ 그럼 답을 구하는 과정을 설명해줄래?",
+                   "앗 내가 틀렸구나😭 답을 구하는 과정은 어떻게 되니?",
+                   "내가 잘못 풀었구나🥲 어떻게 답을 구할 수 있는지 설명해줄래?",
+                   "내가 틀리게 풀었구나ㅠ_ㅠ 답을 구하는 법을 설명해줄 수 있니?"]
+
     submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n왜 틀렸는지 설명해줄래?",
+        text=answer_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
         reply_markup=reply_markup
     )
 
