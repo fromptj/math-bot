@@ -44,7 +44,10 @@ QUESTION_6, QUESTION_6_ADDED, QUESTION_7, QUESTION_7_ADDED, QUESTION_8, QUESTION
 QUESTION_11, QUESTION_11_ADDED, QUESTION_12, QUESTION_12_ADDED, QUESTION_13, QUESTION_13_ADDED, QUESTION_14, QUESTION_14_ADDED, QUESTION_15, QUESTION_15_ADDED, \
 QUESTION_16, QUESTION_16_ADDED, QUESTION_17, QUESTION_17_ADDED, QUESTION_18, QUESTION_18_ADDED, QUESTION_19, QUESTION_19_ADDED, QUESTION_20, QUESTION_20_ADDED, \
 QUESTION_21, QUESTION_21_ADDED, QUESTION_22, QUESTION_22_ADDED, QUESTION_23, QUESTION_23_ADDED, QUESTION_24, QUESTION_24_ADDED, QUESTION_25, QUESTION_25_ADDED, \
-QUESTION_26, QUESTION_26_ADDED, QUESTION_27, QUESTION_27_ADDED, QUESTION_28, QUESTION_28_ADDED, QUESTION_29, QUESTION_29_ADDED, QUESTION_30, QUESTION_30_ADDED = range(61)
+QUESTION_26, QUESTION_26_ADDED, QUESTION_27, QUESTION_27_ADDED, QUESTION_28, QUESTION_28_ADDED, QUESTION_29, QUESTION_29_ADDED, QUESTION_30, QUESTION_30_ADDED, \
+QUESTION_31, QUESTION_31_ADDED, QUESTION_32, QUESTION_32_ADDED, QUESTION_33, QUESTION_33_ADDED, QUESTION_34, QUESTION_34_ADDED, QUESTION_35, QUESTION_35_ADDED = range(71)
+
+mode = "la"
 
 async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
@@ -63,7 +66,7 @@ async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     chat_id = update.message.chat.id
 
     await context.bot.send_message(
-        chat_id=chat_id, text="안녕 반가워😊 나는 오늘 너와 함께 도형 문제를 풀 챗봇이야.\n오늘 우리는 30분 동안 수학의 도형 부분을 공부하게 될 거야!"
+        chat_id=chat_id, text="안녕 반가워😊 나는 오늘 너와 함께 도형 문제를 풀 챗봇이야.\n오늘 우리는 20분 동안 수학의 도형 부분을 공부하게 될 거야!"
     )
 
     await context.bot.send_message(
@@ -88,7 +91,7 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그럼 1번 문제부터 시작해보자!',
+        text='그럼 1번 문제부터 풀어볼게!',
     )
 
     await context.bot.send_photo(
@@ -100,7 +103,7 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 16×14÷2야.\n\n내가 구한 답이 맞니?",
+        text="내가 구한 답은 16×14÷2야!\n\n내가 구한 답이 맞니?🤔",
         reply_markup= reply_markup
     )
 
@@ -112,12 +115,17 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_1
 
 async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 2번 문제야!',
+        text='알려줘서 정말 고마워~! 다음은 2번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -129,7 +137,7 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, (90+60)÷2가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="내 생각엔 90×60인 것 같은데,\n\n내가 구한 게 정답이니?",
         reply_markup=reply_markup
     )
 
@@ -141,12 +149,17 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_2
 
 async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 3번 문제야!',
+        text='아하 그렇구나!! 고마워~ 다음은 3번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -158,7 +171,7 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답은 (200+60)×140÷2야.\n\n내가 구한 답이 맞았니?",
+        text="내가 푼 답은 (200+60)×140÷2야~\n\n내가 구한 답이 맞았는지 알려줄 수 있어?",
         reply_markup=reply_markup
     )
 
@@ -170,12 +183,17 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_3
 
 async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 4번 문제야!',
+        text='나도 열심히 이해해볼게💪 다음은 4번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -187,7 +205,7 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 15×8이라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 15×8이라고 생각해!!\n\n어때? 내 답이 맞을까?🧐",
         reply_markup=reply_markup
     )
 
@@ -199,12 +217,17 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_4
 
 async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 5번 문제야!',
+        text='너와 함께 문제를 풀 수 있어서 행복해😘 다음은 5번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -216,7 +239,7 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 400×630÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 400×630÷2인데,\n\n내가 맞게 풀었을까??",
         reply_markup=reply_markup
     )
 
@@ -228,12 +251,17 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_5
 
 async def question_6 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 6번 문제야!',
+        text='설명 고마워! 다음은 6번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -245,7 +273,7 @@ async def question_6 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 7×9야.\n\n내가 구한 답이 맞니?",
+        text="내가 구한 답은 4×8야!!\n\n내가 답을 맞게 구한걸까?🙏🏻",
         reply_markup=reply_markup
     )
 
@@ -257,12 +285,17 @@ async def question_6 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_6
 
 async def question_7 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 7번 문제야!',
+        text='그렇구나! 다음에도 멋진 설명 부탁해😆 다음은 7번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -274,7 +307,7 @@ async def question_7 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, 18×25÷2가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="답을 구해봤는데 35×35가 나왔어!!\n\n내가 구한 게 정답이니~?",
         reply_markup=reply_markup
     )
 
@@ -286,12 +319,17 @@ async def question_7 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_7
 
 async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 8번 문제야!',
+        text='알려줘서 고마워! 다음은 8번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -303,7 +341,7 @@ async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 40×50이야.\n\n내가 구한 답 맞았니?",
+        text="내가 생각한 답은 18×25÷2이야!\n\n내 답이 맞다고 생각해, 아님 틀리다고 생각해??",
         reply_markup=reply_markup
     )
 
@@ -315,12 +353,17 @@ async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_8
 
 async def question_9 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 9번 문제야!',
+        text='그렇구나! 다음 문제들도 열심히 풀어볼게🙌🏻 다음은 9번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -332,7 +375,7 @@ async def question_9 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 35×35라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 25×50÷2라고 생각해ㅎㅎ\n\n내 답이 맞을까??",
         reply_markup=reply_markup
     )
 
@@ -344,12 +387,17 @@ async def question_9 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_9
 
 async def question_10 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 10번 문제야!',
+        text='친절하게 알려줘서 고마워! 다음은 10번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -361,7 +409,7 @@ async def question_10 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (15+7)×9÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 7×9÷2야!\n\n내가 구한 게 맞았을까?🤔",
         reply_markup=reply_markup
     )
 
@@ -373,12 +421,17 @@ async def question_10 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_10
 
 async def question_11 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 11번 문제야!',
+        text='아하 그렇게 생각했구나~!!! 다음은 11번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -390,7 +443,7 @@ async def question_11 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 105×68야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 105×68인데,\n\n어떻게 생각해?🤩",
         reply_markup=reply_markup
     )
 
@@ -402,12 +455,17 @@ async def question_11 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_11
 
 async def question_12 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 12번 문제야!',
+        text='너가 도와줘서 문제 푸는게 재밌어😙 다음은 12번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -419,7 +477,7 @@ async def question_12 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, (7+12)÷2가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="답을 구해보니, (12+8)×2가 나왔어!!\n\n내가 구한 게 정답일까??",
         reply_markup=reply_markup
     )
 
@@ -431,12 +489,17 @@ async def question_12 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_12
 
 async def question_13 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 13번 문제야!',
+        text='아하 그렇구나! 다음은 13번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -448,7 +511,7 @@ async def question_13 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 30×60이야.\n\n내가 구한 답 맞았니?",
+        text="내가 생각한 답은 15×7÷2야~\n\n내가 잘 풀은걸까?🧐",
         reply_markup=reply_markup
     )
 
@@ -460,12 +523,17 @@ async def question_13 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_13
 
 async def question_14 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 14번 문제야!',
+        text='날 도와줘서 정말 고마워~ 다음은 14번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -477,7 +545,7 @@ async def question_14 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 (5+15)×6÷2라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 7×12÷2라고 생각해!!\n\n너는 내 답이 맞았다고 생각해??",
         reply_markup=reply_markup
     )
 
@@ -489,12 +557,17 @@ async def question_14 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_14
 
 async def question_15 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 15번 문제야!',
+        text='아하! 다음 문제도 잘 부탁해! 다음은 15번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -506,7 +579,7 @@ async def question_15 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (4×6)×2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 30×80÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -518,12 +591,17 @@ async def question_15 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_15
 
 async def question_16 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 16번 문제야!',
+        text='나도 그렇게 생각해! 다음은 16번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -535,7 +613,7 @@ async def question_16 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 (4+24)×15÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 구한 답은 (5+15)×6야!\n\n내 답에 대해 어떻게 생각해??",
         reply_markup=reply_markup
     )
 
@@ -547,12 +625,17 @@ async def question_16 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_16
 
 async def question_17 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 17번 문제야!',
+        text='너의 설명을 기억하도록 노력할게💪🏻 다음은 17번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -564,7 +647,7 @@ async def question_17 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해 보니, 3×5가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="답을 구해봤는데, 4×6÷2가 나왔어~\n\n내가 구한 게 정답이니?🙏",
         reply_markup=reply_markup
     )
 
@@ -576,12 +659,17 @@ async def question_17 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_17
 
 async def question_18 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 18번 문제야!',
+        text='알려줘서 고마워! 다음은 18번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -593,7 +681,7 @@ async def question_18 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답은 7+4야.\n\n내가 구한 답이 맞았니?",
+        text="내가 생각한 답은 20+9+9야!\n\n내가 구한 답을 어떻게 생각해??",
         reply_markup=reply_markup
     )
 
@@ -605,12 +693,17 @@ async def question_18 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_18
 
 async def question_19 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 19번 문제야!',
+        text='너의 설명이 정말 도움이 되고 있어! 다음 19번 문제도 잘 부탁해~',
     )
 
     await context.bot.send_photo(
@@ -622,7 +715,7 @@ async def question_19 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 30×18÷2라고 생각해.\n\n내 답이 맞을까?",
+        text="내가 열심히 답을 구해봤는데 (24+4)×15가 나왔어!\n\n내가 맞게 푼걸까?",
         reply_markup=reply_markup
     )
 
@@ -634,12 +727,17 @@ async def question_19 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_19
 
 async def question_20 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 20번 문제야!',
+        text='너랑 같이 공부하니 정말 재밌어! 다음은 20번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -651,7 +749,7 @@ async def question_20 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 16×20÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 3×4÷2야~!\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -663,12 +761,17 @@ async def question_20 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_20
 
 async def question_21 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 21번 문제야!',
+        text='그렇구나! 알려줘서 고마워~ 다음은 21번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -680,7 +783,7 @@ async def question_21 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 (9+14)×12÷2야.\n\n내가 구한 답이 맞니?",
+        text="내가 구한 답은 7×4인데,\n\n너가 생각하기엔 어때~??",
         reply_markup=reply_markup
     )
 
@@ -692,12 +795,17 @@ async def question_21 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_12
 
 async def question_22 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 22번 문제야!',
+        text='너의 설명 덕분에 힘이 난다! 다음은 22번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -709,7 +817,7 @@ async def question_22 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, 25×16÷2가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="내가 답을 구해봤는데 말이야~ 30×18가 나왔어!\n\n내가 구한 게 정답일까😙?",
         reply_markup=reply_markup
     )
 
@@ -721,12 +829,17 @@ async def question_22 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_22
 
 async def question_23 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 23번 문제야!',
+        text='그렇구나 그렇구나! 다음은 23번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -738,7 +851,7 @@ async def question_23 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 13×10÷2야.\n\n내가 구한 답이 맞았니?",
+        text="내가 생각한 답은 4×20야!\n\n내가 구한 답이 맞다고 생각해?😆",
         reply_markup=reply_markup
     )
 
@@ -750,12 +863,17 @@ async def question_23 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_23
 
 async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 24번 문제야!',
+        text='알려줘서 고마워! 다음 문제도 잘 부탁해🤩 이제 24번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -767,7 +885,7 @@ async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 180×90÷2라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 9×8라고 생각하는데 어때?\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
 
@@ -779,12 +897,17 @@ async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_24
 
 async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 25번 문제야!',
+        text='알려줘서 고마워! 다음은 25번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -796,7 +919,7 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 6×2×12야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 9×12÷2인데,\n\n내가 구한 결과가 어떻다고 생각해?",
         reply_markup=reply_markup
     )
 
@@ -808,12 +931,17 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_25
 
 async def question_26 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 26번 문제야!',
+        text='그렇구나~ 너랑 같이 공부할 수 있어서 행복해🤗 다음 26번 문제도 잘 부탁해!',
     )
 
     await context.bot.send_photo(
@@ -825,7 +953,7 @@ async def question_26 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 11x11야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 25x16÷2야!\n\n내가 구한 게 맞았니?🧐",
         reply_markup=reply_markup
     )
 
@@ -837,12 +965,17 @@ async def question_26 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_26
 
 async def question_27 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 27번 문제야!',
+        text='자세한 설명 고마워! 다음 문제는 27번이야~',
     )
 
     await context.bot.send_photo(
@@ -854,7 +987,7 @@ async def question_27 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, 15×12가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="답을 구해봤는데, 24x10÷2가 나왔어!!\n\n내가 구한 게 정답이라고 생각하니?",
         reply_markup=reply_markup
     )
 
@@ -866,12 +999,17 @@ async def question_27 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_27
 
 async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 28번 문제야!',
+        text='나도 너와 같은 생각이야!! 다음 28번 문제도 잘 부탁해~',
     )
 
     await context.bot.send_photo(
@@ -883,7 +1021,7 @@ async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 25×15÷2야.\n\n내가 구한 답 맞았니?",
+        text="내가 생각해봤는데, 답은 150×90÷2인 것 같아!\n\n내가 구한 답이 맞다고 생각해?🤔",
         reply_markup=reply_markup
     )
 
@@ -895,12 +1033,17 @@ async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_28
 
 async def question_29 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 29번 문제야!',
+        text='그렇구나! 너의 설명 잊지 않도록 노력해볼게💪🏻 다음은 29번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -912,7 +1055,7 @@ async def question_29 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 18×10÷2라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 (6+12)×2라고 생각하는데 어때?\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
 
@@ -924,12 +1067,17 @@ async def question_29 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_29
 
 async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 30번 문제야!',
+        text='잘 알려줘서 고마워! 다음은 30번이야~',
     )
 
     await context.bot.send_photo(
@@ -941,7 +1089,7 @@ async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (6+16)×5÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 마지막 문제의 답은 6×4야!!\n\n내가 잘 풀었다고 생각해~?",
         reply_markup=reply_markup
     )
 
@@ -952,28 +1100,178 @@ async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     return QUESTION_30
 
-async def answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def question_31 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, "la", question_id, user.id)
-    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
-
-    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
-    reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n어떻게 답이 나왔는지 설명해줄래?",
+        text='너가 도와줘서 문제 푸는 게 재밌어😙 다음은 31번 문제야!',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a31.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="답을 구해보니, (12+8)×2가 나왔어!!\n\n내가 구한 게 정답일까??",
         reply_markup=reply_markup
     )
 
-    return 2 * question_id
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
 
-async def answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["question_id"] = 31
+
+    return QUESTION_31
+
+async def question_32 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='아하 그렇구나! 다음은 32번 문제야~',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a32.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="내가 생각한 답은 15×7÷2야~\n\n내가 잘 풀은걸까?🧐",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 32
+
+    return QUESTION_32
+
+async def question_33 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='아 그렇네! 날 도와줘서 정말 고마워~ 다음은 33번 문제야!',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a33.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="나는 답이 7×12÷2라고 생각해!!\n\n너는 내 답이 맞았다고 생각해??",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 33
+
+    return QUESTION_33
+
+async def question_34 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='아하! 다음 문제도 잘 부탁해! 다음은 34번 문제야~',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a34.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="내가 생각한 답은 30×80÷2야.\n\n내가 구한 게 맞았니?",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 34
+
+    return QUESTION_34
+
+async def question_35 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='알려줘서 정말 고마워~! 이제 35번 문제야!',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a35.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="내가 구한 답은 (5+15)×6이야!\n\n너는 내 답에 대해 어떻게 생각해??",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 35
+
+    return QUESTION_35
+
+async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
@@ -983,12 +1281,238 @@ async def answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
-    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
-    reply_markup = InlineKeyboardMarkup(submit_button)
+    answer_o_text = [
+        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "와 맞았다!!😆\n답을 구하는 과정을 설명해줄래?",
+        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "나 맞았네!!🤩\n어떻게 답을 구하는지 한 번 설명해줄래?"
+    ]
+
+    answer_x_text = [
+        "내 답이 틀렸구나ㅠㅠ\n그럼 답을 구하는 과정을 설명해줄래?",
+        "앗 내가 틀렸구나😭\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "내 답이 틀렸구나ㅠ🥲\n그럼 답을 구하는 과정을 설명해줄래?",
+        "내가 틀리게 풀었구나ㅠ_ㅠ\n그럼 답을 구하는 법을 설명해줄 수 있니?"
+    ]
+
+    submit_button = {
+        1 : [
+            [InlineKeyboardButton('밑변의 길이는 16, 높이는 14이기 때문에 식을 세워보면, 16×14÷2야', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 16, 높이는 16라서 식을 세워보면, 16×16÷2야', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 16, 높이는 14이기 때문에 식을 세워보면, 16×14야', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 14, 높이는 16이기 때문에 식을 세워보면, 14×16가 돼', callback_data='4')]
+        ],
+        2 : [
+            [InlineKeyboardButton('한 대각선의 길이는 90, 다른 대각선은 길이가 60이기 때문에 식은 90×60이야', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 90, 다른 대각선의 길이는 60이므로 식은 90×60÷2야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 90, 다른 대각선의 길이는 30이기 때문에 90×30÷2야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 45, 다른 대각선은 길이가 60이므로 45×60÷2야', callback_data='4')]
+        ],
+        3 : [
+            [InlineKeyboardButton('윗변의 길이는 140, 아랫변의 길이는 200, 높이는 60니까 (140+200)×60÷2야', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 200, 아랫변의 길이는 60, 높이는 140이니까 식은 (200+60)×14÷2야', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 60, 아랫변의 길이는 140, 높이는 200이니까 식은 (60+140)×200÷2야', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 60, 아랫변의 길이는 140, 높이는 200이니까 식은 (60+140)×200이야', callback_data='4')]
+        ],
+        4 : [
+            [InlineKeyboardButton('세로는 8cm니까 식은 8×8이야', callback_data='1')],
+            [InlineKeyboardButton('가로는 15cm니까 식은 15×15야', callback_data='2')],
+            [InlineKeyboardButton('가로는 15cm, 세로는 8cm니까 식을 세워보면 (15+8)×2야', callback_data='3')],
+            [InlineKeyboardButton('가로는 15cm이고 세로는 8cm니까 식을 구해보면 15×8이야', callback_data='4')]
+        ],
+        5 : [
+            [InlineKeyboardButton('밑변은 400cm이고 높이는 630cm이기 때문에 식을 세워보면 400×630이야', callback_data='1')],
+            [InlineKeyboardButton('밑변은 400cm이고 높이는 630cm이기 때문에 식을 세워보면 400×630÷2야', callback_data='2')],
+            [InlineKeyboardButton('밑변은 200cm이고 높이는 630cm이기 때문에 식을 구해보면 200×630이야', callback_data='3')],
+            [InlineKeyboardButton('밑변은 630cm이고 높이는 400cm라서 식을 만들어보면 640×400이야.', callback_data='4')]
+        ],
+        6 : [
+            [InlineKeyboardButton('한 변의 길이가 4cm이고 변이 4개니까 식을 세워보면 4×4야', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이가 4cm이고 변은 6개니까 식은 4×6이 맞아', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 4cm이고 변이 8개여서 식은 4×8이 돼', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이가 6cm이고 변이 4개라서 식은 6×4야', callback_data='4')]
+        ],
+        7 : [
+            [InlineKeyboardButton('한 변의 길이는 35cm이기 때문에 식을 구해보면 35×4가 돼', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이는 30cm이기 때문에 식을 구해보면 30×30이 돼', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 35cm이고, 정사각형의 넓이는 35×35를 하면 돼', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이는 35cm이기 때문에 식을 구해보면 35×35÷2가 돼', callback_data='4')]
+        ],
+        8 : [
+            [InlineKeyboardButton('밑변의 길이는 18cm고 높이는 18cm니까 18×18÷2가 맞아', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 25cm고 높이는 18cm라서 식은 25×18이야', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 18cm고 높이는 25cm이기 때문에 식은 18×25÷2가 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 18cm고 높이는 18cm니까 18×18이 맞는 식이야', callback_data='4')]
+        ],
+        9 : [
+            [InlineKeyboardButton('한 대각선의 길이는 40cm이고 다른 대각선의 길이는 50cm이므로 식은 40×50이야', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 40cm이고 다른 대각선의 길이는 50cm니까 식이 40×50÷2야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 25cm이고 다른 대각선의 길이는 50cm니까 식은 25×50÷2야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 40cm이고 다른 대각선의 길이는 50cm니까 식이 20×50÷2야', callback_data='4')]
+        ],
+        10 : [
+            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 9cm니까 식은 7×9÷2야', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 9cm니까 식은 7×9×2가 맞아', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 9cm이고 높이는 7cm니까 식은 9×7÷2라고 세우면 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 9cm이고 높이는 7cm이기 때문에 식을 구해보면 9×7이 나와.', callback_data='4')]
+        ],
+        11 : [
+            [InlineKeyboardButton('가로는 105cm이고 세로는 68cm니까 식은 105+68이야', callback_data='1')],
+            [InlineKeyboardButton('가로는 105cm이고 세로는 68cm이기 때문에 식을 구하면 105×68이 나와', callback_data='2')],
+            [InlineKeyboardButton('가로는 105cm이고 세로는 68cm라서 식은 (105+68)÷2가 맞아', callback_data='3')],
+            [InlineKeyboardButton('가로는 105cm이고 세로는 60cm니까 식은 105×60라고 세우면 돼', callback_data='4')]
+        ],
+        12 : [
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변은 10cm니까 식은 12+10이야', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변이 10cm니까 식은 (12+10)×2가 나와', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변은 8cm니까 (12+8)×2가 맞는 식이야', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변이 8cm라서 12×8으로 구하면 돼', callback_data='4')]
+        ],
+        13 : [
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변이 9cm, 높이는 7cm니까 (15+9)×7÷2가 맞아', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 높이는 7cm니까 식을 구하면 15×72가 나와', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변은 9cm, 높이는 9cm니까 식은 (15+9)×9÷2야', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변은 9cm, 높이는 7cm니까 식은 (15+9)×7이야', callback_data='4')]
+        ],
+        14 : [
+            [InlineKeyboardButton('밑변의 길이는 12cm이고 높이는 7cm니까 식은 12×7÷2가 맞아', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 12cm니까 식을 구해보면 7×12가 나와', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 12cm니까 식은 7×12÷2야', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 12cm이고 높이는 7cm니까 식은 12×7이야', callback_data='4')]
+        ],
+        15 : [
+            [InlineKeyboardButton('밑변의 길이는 30cm이고 높이는 80cm니까 30×80가 맞아', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 30cm이고 높이는 80cm이기 때문에 식은 30×80÷2가 맞아', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 80cm이고 높이는 30cm니까 식은 80×30라고 세우면 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 80cm이고 높이는 30cm라서 식은 80×30÷2야', callback_data='4')]
+        ],
+        16 : [
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변은 15, 높이가 6이니까 식은 (5+15)×6이야', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 15, 높이는 6이니까 (5+15)×6÷2야', callback_data='2')],
+            [InlineKeyboardButton('아랫변의 길이는 15이고 높이는 6이기 때문에 식을 세우면 15×6÷2가 돼', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 15, 높이는 6이니까 (5+15)×6이 맞아', callback_data='4')]
+        ],
+        17 : [
+            [InlineKeyboardButton('한 대각선의 길이는 4cm이고 다른 대각선의 길이는 6cm니까 4×6가 맞아', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 6cm, 다른 대각선의 길이는 4cm이기 때문에 식은 (4+6)×2야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 6cm, 다른 대각선의 길이는 6cm니까 4×6÷2야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 4cm, 다른 대각선의 길이는 6cm니까 4×6÷2가 돼', callback_data='4')]
+        ],
+        18 : [
+            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm이니까 20+9+9가 돼', callback_data='1')],
+            [InlineKeyboardButton('가로는 20cm니까 식을 구해보면 20+20이 돼', callback_data='2')],
+            [InlineKeyboardButton('세로가 9cm니까 식을 세워보면 9×4가 돼', callback_data='3')],
+            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm이니까 (20+9)×2가 돼', callback_data='4')]
+        ],
+        19 : [
+            [InlineKeyboardButton('윗변의 길이는 24, 아랫변이 4, 높이는 15니까 (24+4)×15÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 24, 아랫변이 15, 높이는 4니까 식은 (24+15)×4÷2가 나와', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 24, 아랫변이 4, 높이는 15니까 식은 (24+4)×15가 돼', callback_data='3')],
+            [InlineKeyboardButton('높이는 15, 아랫변의 길이는 4니까 식을 세워 보면 15×4÷2가 돼', callback_data='4')]
+        ],
+        20: [
+            [InlineKeyboardButton('밑변은 3이고 높이는 4이기 때문에 식은 3×4야', callback_data='1')],
+            [InlineKeyboardButton('밑변은 3이고 높이는 4이기 때문에 식은 3×4÷2야', callback_data='2')],
+            [InlineKeyboardButton('밑변은 4이고 높이는 3이기 때문에 식은 (4+3)×2야', callback_data='3')],
+            [InlineKeyboardButton('밑변은 3이고 높이는 5이기 때문에 식은 3×5야', callback_data='4')]
+        ],
+        21 : [
+            [InlineKeyboardButton('세로는 4cm니까 식은 4×4야', callback_data='1')],
+            [InlineKeyboardButton('가로는 7cm, 세로는 4cm니까 식을 세워보면 (7+4)×2야', callback_data='2')],
+            [InlineKeyboardButton('가로는 7cm이고 세로는 4cm니까 식을 구해보면 7×4야', callback_data='3')],
+            [InlineKeyboardButton('가로는 7cm니까 식은 7×7이야.', callback_data='4')]
+        ],
+        22 : [
+            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 18이어서 식은 30×18이 돼', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 15, 다른 대각선의 길이는 18이므로 15×18이야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 18이라 식은 30×18÷2야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 9니까 30×9÷2가 돼', callback_data='4')]
+        ],
+        23 : [
+            [InlineKeyboardButton('밑변의 길이는 4이고, 높이는 20이기 때문에 식을 구하면 4×20이 돼', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 4이고, 높이는 20이기 때문에 식은 4×20÷2가 돼', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 20이고, 높이는 4이기 때문에 식이 20×4가 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 16이고, 높이는 20이기 때문에 식은 16×20÷2가 돼', callback_data='4')]
+        ],
+        24 : [
+            [InlineKeyboardButton('한 변의 길이는 9cm, 변의 수는 7개니까 식을 구해보면 9×7가 돼', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이는 9cm, 변의 수는 6개니까 9×6이 돼', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 18cm, 변의 수는 7개니까 식은 18×7이야', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이는 9cm, 변의 수가 8개니까 식을 세워보면 9×8이야', callback_data='4')]
+        ],
+        25 : [
+            [InlineKeyboardButton('윗변의 길이는 9, 아랫변이 14, 높이는 12니까 (9+14)×12÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 12, 아랫변은 14, 높이는 9니까 식이 (12+14)×9÷2가 나와', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 9, 높이는 12니까 식을 세워 보면 9×12÷2가 돼.', callback_data='3')],
+            [InlineKeyboardButton('높이는 12, 아랫변의 길이는 14니까 식을 세워 보면 12×14÷2가 돼.', callback_data='4')]
+        ],
+        26 : [
+            [InlineKeyboardButton('종이의 밑변은 25, 높이는 16이기 때문에 식을 구해보면 25×16이 돼', callback_data='1')],
+            [InlineKeyboardButton('종이의 밑변은 25, 높이는 16이기 때문에 식을 구해보면 25×16÷2가 돼', callback_data='2')],
+            [InlineKeyboardButton('종이의 밑변은 16, 높이는 25이기 때문에 식은 16×25÷2야', callback_data='3')],
+            [InlineKeyboardButton('종이의 밑변은 50, 높이는 16이기 때문에 식은 50×16이야', callback_data='4')]
+        ],
+        27 : [
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 24이므로 식은 10×24야', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 13이어서 10×13이야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 13이니까 10×13÷2이야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 24이기 때문에 10×24÷2야', callback_data='4')]
+        ],
+        28 : [
+            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식은 150×90÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식이 150×90가 돼', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 150cm이니까 식은 180×150÷2가 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 90cm니까 식을 만들면 180×90÷2가 돼', callback_data='4')]
+        ],
+        29 : [
+            [InlineKeyboardButton('가로는 6cm니까 식은 6×6이야', callback_data='1')],
+            [InlineKeyboardButton('세로는 12cm니까 식은 12×12야', callback_data='2')],
+            [InlineKeyboardButton('가로는 6cm, 세로는 12cm이니까 식을 세워보면 (6+12)×2야', callback_data='3')],
+            [InlineKeyboardButton('가로는 6cm이고 세로는 12cm이니까 식을 구해보면 6×12야', callback_data='4')]
+        ],
+        30 : [
+            [InlineKeyboardButton('한 변의 길이는 6cm이고, 변의 개수가 2개니까 6×2가 돼', callback_data='1')],
+            [InlineKeyboardButton('한 변은 6cm이고 변의 개수는 3개니까 테두리의 길이는 6×3이 돼', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이가 6cm이고 변은 3개니까 테두리는 6×3÷2가 돼', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이가 3cm니까 변은 3개니까 테두리는 3×3이 돼', callback_data='4')]
+        ],
+        31 : [
+            [InlineKeyboardButton('한 변의 길이는 11m이기 때문에 식을 구해보면 11×11이 돼', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이는 22m이기 때문에 식을 세워보면 22×22가 돼', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 11m이고, 정사각형의 넓이는 11×4를 하면 돼', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이는 11m이기 때문에 식을 구해보면 11×11÷2가 돼', callback_data='4')]
+        ],
+        32 : [
+            [InlineKeyboardButton('밑변은 15cm이고 높이는 12cm이기 때문에 식을 세우면 15×12÷2야', callback_data='1')],
+            [InlineKeyboardButton('밑변은 15cm이고 높이는 5cm이기 때문에 식을 세워보면 15×5야', callback_data='2')],
+            [InlineKeyboardButton('밑변은 5cm이고 높이는 12cm이기 때문에 식을 구해보면 5×12야', callback_data='3')],
+            [InlineKeyboardButton('밑변은 5cm이고 높이는 15cm라서 식을 만들어보면 5×15야', callback_data='4')]
+        ],
+        33 : [
+            [InlineKeyboardButton('밑변의 길이는 20cm, 높이는 15cm이므로 식을 구하면 20×15÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 25cm, 높이는 15cm라서 식은 25×15÷2가 돼', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 20cm, 높이는 15cm여서 식을 세우면 20×15가 되네', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 15cm, 높이는 25cm이므로 식은 15×25÷2가 나와', callback_data='4')]
+        ],
+        34 : [
+            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 10이어서 식은 18×10이야', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 5이므로 18×5÷2야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 9, 다른 대각선의 길이는 10이니까 9×10÷2가 나와', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 10이니까 18×10÷2야', callback_data='4')]
+        ],
+        35: [
+            [InlineKeyboardButton('윗변의 길이는 6, 아랫변의 길이는 10, 높이는 5니까 (6+10)×5÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 10, 높이는 6이니까 식을 구하면 (5+10)×6÷2가 나와.', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 10, 높이는 6이니까 식이 (5+10)×6가 돼.', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 6, 아랫변의 길이는 10, 높이는 5니까 (6+10)×5가 돼', callback_data='4')]
+        ]
+
+    }
+    reply_markup = InlineKeyboardMarkup(submit_button[question_id])
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n왜 틀렸는지 설명해줄래?",
+        text= answer_o_text[question_id % 4] if update.callback_query.data == "맞아" else answer_x_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
         reply_markup=reply_markup
     )
 
@@ -1051,278 +1575,288 @@ if __name__ == '__main__':
                 CallbackQueryHandler(question_1, pattern="^\s*준비됐어\s*"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
                 # MessageHandler(filters.Regex("^\s*준비됐어\s*"), question_1),
-                #MessageHandler(filters.Regex("^[^/cancel]"), warning)
+                # MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1_ADDED: [
-                CallbackQueryHandler(question_2, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_2, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_2: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_2_ADDED: [
-                CallbackQueryHandler(question_3, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_3, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_3: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_3_ADDED: [
-                CallbackQueryHandler(question_4, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_4, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_4: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_4_ADDED: [
-                CallbackQueryHandler(question_5, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_5, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_5: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_5_ADDED: [
-                CallbackQueryHandler(question_6, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_6, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_6: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_6_ADDED: [
-                CallbackQueryHandler(question_7, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_7, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_7: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_7_ADDED: [
-                CallbackQueryHandler(question_8, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_8, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_8: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_8_ADDED: [
-                CallbackQueryHandler(question_9, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_9, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_9: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_9_ADDED: [
-                CallbackQueryHandler(question_10, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_10, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_10: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_10_ADDED: [
-                CallbackQueryHandler(question_11, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_11, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_11: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_11_ADDED: [
-                CallbackQueryHandler(question_12, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_12, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_12: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_12_ADDED: [
-                CallbackQueryHandler(question_13, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_13, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_13: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_13_ADDED: [
-                CallbackQueryHandler(question_14, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_14, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_14: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_14_ADDED: [
-                CallbackQueryHandler(question_15, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_15, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_15: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_15_ADDED: [
-                CallbackQueryHandler(question_16, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_16, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_16: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_16_ADDED: [
-                CallbackQueryHandler(question_17, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_17, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_17: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_17_ADDED: [
-                CallbackQueryHandler(question_18, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_18, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_18: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_18_ADDED: [
-                CallbackQueryHandler(question_19, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_19, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_19: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_19_ADDED: [
-                CallbackQueryHandler(question_20, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_20, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_20: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_20_ADDED: [
-                CallbackQueryHandler(question_21, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_21, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_21: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_21_ADDED: [
-                CallbackQueryHandler(question_22, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_22, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_22: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_22_ADDED: [
-                CallbackQueryHandler(question_23, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_23, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_23: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_23_ADDED: [
-                CallbackQueryHandler(question_24, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_24, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_24: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_24_ADDED: [
-                CallbackQueryHandler(question_25, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_25, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_25: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_25_ADDED: [
-                CallbackQueryHandler(question_26, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_26, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_26: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_26_ADDED: [
-                CallbackQueryHandler(question_27, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_27, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_27: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_27_ADDED: [
-                CallbackQueryHandler(question_28, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_28, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_28: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_28_ADDED: [
-                CallbackQueryHandler(question_29, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_29, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_29: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_29_ADDED: [
-                CallbackQueryHandler(question_30, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_30, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_30: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_30_ADDED: [
-                CallbackQueryHandler(end, pattern="^설명 마치기"),
+                CallbackQueryHandler(question_31, pattern="^(1|2|3|4)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
-            ]
+            ],
+            QUESTION_31: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_31_ADDED: [
+                CallbackQueryHandler(question_32, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_32: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_32_ADDED: [
+                CallbackQueryHandler(question_33, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_33: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_33_ADDED: [
+                CallbackQueryHandler(question_34, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_34: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_34_ADDED: [
+                CallbackQueryHandler(question_35, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_35: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_35_ADDED: [
+                CallbackQueryHandler(end, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )

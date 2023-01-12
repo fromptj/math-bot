@@ -44,7 +44,10 @@ QUESTION_6, QUESTION_6_ADDED, QUESTION_7, QUESTION_7_ADDED, QUESTION_8, QUESTION
 QUESTION_11, QUESTION_11_ADDED, QUESTION_12, QUESTION_12_ADDED, QUESTION_13, QUESTION_13_ADDED, QUESTION_14, QUESTION_14_ADDED, QUESTION_15, QUESTION_15_ADDED, \
 QUESTION_16, QUESTION_16_ADDED, QUESTION_17, QUESTION_17_ADDED, QUESTION_18, QUESTION_18_ADDED, QUESTION_19, QUESTION_19_ADDED, QUESTION_20, QUESTION_20_ADDED, \
 QUESTION_21, QUESTION_21_ADDED, QUESTION_22, QUESTION_22_ADDED, QUESTION_23, QUESTION_23_ADDED, QUESTION_24, QUESTION_24_ADDED, QUESTION_25, QUESTION_25_ADDED, \
-QUESTION_26, QUESTION_26_ADDED, QUESTION_27, QUESTION_27_ADDED, QUESTION_28, QUESTION_28_ADDED, QUESTION_29, QUESTION_29_ADDED, QUESTION_30, QUESTION_30_ADDED = range(61)
+QUESTION_26, QUESTION_26_ADDED, QUESTION_27, QUESTION_27_ADDED, QUESTION_28, QUESTION_28_ADDED, QUESTION_29, QUESTION_29_ADDED, QUESTION_30, QUESTION_30_ADDED, \
+QUESTION_31, QUESTION_31_ADDED, QUESTION_32, QUESTION_32_ADDED, QUESTION_33, QUESTION_33_ADDED, QUESTION_34, QUESTION_34_ADDED, QUESTION_35, QUESTION_35_ADDED = range(71)
+
+mode = "ha"
 
 async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
@@ -63,7 +66,7 @@ async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     chat_id = update.message.chat.id
 
     await context.bot.send_message(
-        chat_id=chat_id, text="안녕 반가워😊 나는 오늘 너와 함께 도형 문제를 풀 챗봇이야.\n오늘 우리는 30분 동안 수학의 도형 부분을 공부하게 될 거야!"
+        chat_id=chat_id, text="안녕 반가워😊 나는 오늘 너와 함께 도형 문제를 풀 챗봇이야.\n오늘 우리는 20분 동안 수학의 도형 부분을 공부하게 될 거야!"
     )
 
     await context.bot.send_message(
@@ -116,7 +119,7 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, "ha", question_id, user.id)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
     cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
@@ -146,8 +149,13 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_2
 
 async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
@@ -175,6 +183,13 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_3
 
 async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -204,6 +219,13 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_4
 
 async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -233,6 +255,13 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_5
 
 async def question_6 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -262,6 +291,13 @@ async def question_6 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_6
 
 async def question_7 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -291,6 +327,13 @@ async def question_7 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_7
 
 async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -320,6 +363,13 @@ async def question_8 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_8
 
 async def question_9 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -349,6 +399,13 @@ async def question_9 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_9
 
 async def question_10 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -378,6 +435,13 @@ async def question_10 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_10
 
 async def question_11 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -407,6 +471,13 @@ async def question_11 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_11
 
 async def question_12 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -436,6 +507,13 @@ async def question_12 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_12
 
 async def question_13 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -465,6 +543,13 @@ async def question_13 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_13
 
 async def question_14 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -494,6 +579,13 @@ async def question_14 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_14
 
 async def question_15 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -523,6 +615,13 @@ async def question_15 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_15
 
 async def question_16 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -552,6 +651,13 @@ async def question_16 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_16
 
 async def question_17 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -581,6 +687,13 @@ async def question_17 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_17
 
 async def question_18 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -610,6 +723,13 @@ async def question_18 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_18
 
 async def question_19 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -639,6 +759,13 @@ async def question_19 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_19
 
 async def question_20 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -668,6 +795,13 @@ async def question_20 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_20
 
 async def question_21 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -697,6 +831,13 @@ async def question_21 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_12
 
 async def question_22 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -726,6 +867,13 @@ async def question_22 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_22
 
 async def question_23 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -755,6 +903,13 @@ async def question_23 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_23
 
 async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -784,6 +939,13 @@ async def question_24 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_24
 
 async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -813,6 +975,13 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_25
 
 async def question_26 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
@@ -842,12 +1011,19 @@ async def question_26 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_26
 
 async def question_27 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='답을 구해봤는데, 24x10÷2가 나왔어!!\n\n내가 구한 게 정답이라고 생각하니?',
+        text='자세한 설명 고마워! 다음 문제는 27번이야~',
     )
 
     await context.bot.send_photo(
@@ -859,7 +1035,7 @@ async def question_27 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, 15×4가 나왔어.\n\n내가 구한 게 정답이니?",
+        text="답을 구해봤는데, 24x10÷2가 나왔어!!\n\n내가 구한 게 정답이라고 생각하니?",
         reply_markup=reply_markup
     )
 
@@ -871,12 +1047,19 @@ async def question_27 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_27
 
 async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='내가 생각해봤는데, 답은 180×90÷2인 것 같아!\n\n내가 구한 답이 맞다고 생각해?🤔',
+        text='나도 너와 같은 생각이야!! 다음 28번 문제도 잘 부탁해~',
     )
 
     await context.bot.send_photo(
@@ -888,7 +1071,7 @@ async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 20×15÷2야.\n\n내가 구한 답 맞았니?",
+        text="내가 생각해봤는데, 답은 180×90÷2인 것 같아!\n\n내가 구한 답이 맞다고 생각해?🤔",
         reply_markup=reply_markup
     )
 
@@ -900,12 +1083,19 @@ async def question_28 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_28
 
 async def question_29 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='나는 답이 6×12라고 생각하는데 어때?\n\n내 답이 맞을까?',
+        text='그렇구나! 너의 설명 잊지 않도록 노력해볼게💪🏻 다음은 29번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -917,7 +1107,7 @@ async def question_29 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 18×10÷2라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 6×12라고 생각하는데 어때?\n\n내 답이 맞을까?",
         reply_markup=reply_markup
     )
 
@@ -929,12 +1119,19 @@ async def question_29 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     return QUESTION_29
 
 async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     chat_id = update.callback_query.message.chat.id
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='내가 생각한 마지막 문제의 답은 6×3야!!\n\n내가 잘 풀었다고 생각해~?',
+        text='잘 알려줘서 고마워! 다음은 30번이야~',
     )
 
     await context.bot.send_photo(
@@ -946,7 +1143,7 @@ async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (6+10)×5÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 마지막 문제의 답은 6×3야!!\n\n내가 잘 풀었다고 생각해~?",
         reply_markup=reply_markup
     )
 
@@ -956,6 +1153,186 @@ async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     context.user_data["question_id"] = 30
 
     return QUESTION_30
+
+async def question_31 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    chat_id = update.callback_query.message.chat.id
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='너가 도와줘서 문제 푸는 게 재밌어😙 다음은 31번 문제야!',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a31.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="답을 구해보니, (12+10)×2가 나왔어!!\n\n내가 구한 게 정답일까??",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 31
+
+    return QUESTION_31
+
+async def question_32 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    chat_id = update.callback_query.message.chat.id
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='아하 그렇구나! 다음은 32번 문제야~',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a32.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="내가 생각한 답은 (15+9)×7÷2야~\n\n내가 잘 풀은걸까?🧐",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 32
+
+    return QUESTION_32
+
+async def question_33 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    chat_id = update.callback_query.message.chat.id
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='아 그렇네! 날 도와줘서 정말 고마워~ 다음은 33번 문제야!',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a33.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="나는 답이 7×12÷2라고 생각해!!\n\n너는 내 답이 맞았다고 생각해??",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 33
+
+    return QUESTION_33
+
+async def question_34 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    chat_id = update.callback_query.message.chat.id
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='아하! 다음 문제도 잘 부탁해! 다음은 34번 문제야~',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a34.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="내가 생각한 답은 30×80÷2야.\n\n내가 구한 게 맞았니?",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 34
+
+    return QUESTION_34
+
+async def question_35 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    chat_id = update.callback_query.message.chat.id
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text='알려줘서 정말 고마워~! 이제 35번 문제야!',
+    )
+
+    await context.bot.send_photo(
+        chat_id, open('a35.png', 'rb')
+    )
+
+    ox_button = [[InlineKeyboardButton('맞아', callback_data='맞아')], [InlineKeyboardButton('틀렸어', callback_data='틀렸어')]]
+    reply_markup = InlineKeyboardMarkup(ox_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="내가 구한 답은 (5+15)×6÷2야!\n\n너는 내 답에 대해 어떻게 생각해??",
+        reply_markup=reply_markup
+    )
+
+    # context.job_queue.run_once(callback_second, 2, chat_id=chat_id, name=str(chat_id), data=open('P-1-2.png', 'rb'))
+    # context.job_queue.run_once(callback_second, 4, chat_id=chat_id, name=str(chat_id), data=open('P-1-3.png', 'rb'))
+
+    context.user_data["question_id"] = 35
+
+    return QUESTION_35
 
 async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.callback_query.from_user
@@ -967,28 +1344,32 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
-    answer_o_text = ["내가 맞았구나!🥳\n그럼 답을 구하는 과정을 설명해줄 수 있니?",
-                   "와 맞았다!!😆\n그럼 답을 구하는 과정을 설명해줄래?",
-                   "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
-                   "내가 맞았구나🤩\n그럼 어떻게 답을 구하는지 한 번 설명해줄래?"]
+    answer_o_text = [
+        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "와 맞았다!!😆\n답을 구하는 과정을 설명해줄래?",
+        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "나 맞았네!!🤩\n어떻게 답을 구하는지 한 번 설명해줄래?"
+    ]
 
-    answer_x_text = ["내 답이 틀렸구나ㅠㅠ\n그럼 답을 구하는 과정을 설명해줄래?",
-                   "앗 내가 틀렸구나😭\n그럼 답을 구하는 과정은 어떻게 되니?",
-                   "내가 잘못 풀었구나🥲\n그럼 어떻게 답을 구할 수 있는지 설명해줄래?",
-                   "내가 틀리게 풀었구나ㅠ_ㅠ\n그럼 답을 구하는 법을 설명해줄 수 있니?"]
+    answer_x_text = [
+        "내 답이 틀렸구나ㅠㅠ\n그럼 답을 구하는 과정을 설명해줄래?",
+        "앗 내가 틀렸구나😭\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "내 답이 틀렸구나ㅠ🥲\n그럼 답을 구하는 과정을 설명해줄래?",
+        "내가 틀리게 풀었구나ㅠ_ㅠ\n그럼 답을 구하는 법을 설명해줄 수 있니?"
+    ]
 
     submit_button = {
         1 : [
-            [InlineKeyboardButton('밑변의 길이는 16, 높이는 14이기 때문에 식을 세워보면, 14×16÷2야', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 16, 높이는 14이기 때문에 식을 세워보면, 16×14÷2야', callback_data='1')],
             [InlineKeyboardButton('밑변의 길이는 16, 높이는 16라서 식을 세워보면, 16×16÷2야', callback_data='2')],
             [InlineKeyboardButton('밑변의 길이는 16, 높이는 14이기 때문에 식을 세워보면, 16×14야', callback_data='3')],
-            [InlineKeyboardButton('밑변의 길이는 14, 높이는 16이기 때문에 식을 세워보면, 14×16÷2가 돼', callback_data='4')]
+            [InlineKeyboardButton('밑변의 길이는 14, 높이는 16이기 때문에 식을 세워보면, 14×16가 돼', callback_data='4')]
         ],
         2 : [
             [InlineKeyboardButton('한 대각선의 길이는 90, 다른 대각선은 길이가 60이기 때문에 식은 90×60이야', callback_data='1')],
             [InlineKeyboardButton('한 대각선의 길이는 90, 다른 대각선의 길이는 60이므로 식은 90×60÷2야', callback_data='2')],
             [InlineKeyboardButton('한 대각선의 길이는 90, 다른 대각선의 길이는 30이기 때문에 90×30÷2야', callback_data='3')],
-            [InlineKeyboardButton('한 대각선의 길이는 45, 다른 대각선은 60이므로 45×60÷2야', callback_data='4')]
+            [InlineKeyboardButton('한 대각선의 길이는 45, 다른 대각선은 길이가 60이므로 45×60÷2야', callback_data='4')]
         ],
         3 : [
             [InlineKeyboardButton('윗변의 길이는 140, 아랫변의 길이는 200, 높이는 60니까 (140+200)×60÷2야', callback_data='1')],
@@ -1009,10 +1390,10 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('밑변은 630cm이고 높이는 400cm라서 식을 만들어보면 640×400이야.', callback_data='4')]
         ],
         6 : [
-            [InlineKeyboardButton('한 변의 길이가 4cm니까 식을 세워보면 4×4야', callback_data='1')],
-            [InlineKeyboardButton('한 변의 길이가 4cm니까 식은 4×6이 맞아', callback_data='2')],
-            [InlineKeyboardButton('한 변의 길이는 4cm이기 때문에 식은 4×8이 돼', callback_data='3')],
-            [InlineKeyboardButton('한 변의 길이가 6cm라서 식은 6×4야', callback_data='4')]
+            [InlineKeyboardButton('한 변의 길이가 4cm이고 변이 4개니까 식을 세워보면 4×4야', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이가 4cm이고 변은 6개니까 식은 4×6이 맞아', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 4cm이고 변이 8개여서 식은 4×8이 돼', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이가 6cm이고 변이 4개라서 식은 6×4야', callback_data='4')]
         ],
         7 : [
             [InlineKeyboardButton('한 변의 길이는 35cm이기 때문에 식을 구해보면 35×4가 돼', callback_data='1')],
@@ -1027,14 +1408,14 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('밑변의 길이는 18cm고 높이는 18cm니까 18×18이 맞는 식이야', callback_data='4')]
         ],
         9 : [
-            [InlineKeyboardButton('한 대각선의 길이는 40cm이고 다른 대각선의 길이는 50cm이므로 식은 40×50야', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 40cm이고 다른 대각선의 길이는 50cm이므로 식은 40×50이야', callback_data='1')],
             [InlineKeyboardButton('한 대각선의 길이는 40cm이고 다른 대각선의 길이는 50cm니까 식이 40×50÷2야', callback_data='2')],
             [InlineKeyboardButton('한 대각선의 길이는 25cm이고 다른 대각선의 길이는 50cm니까 식은 25×50÷2야', callback_data='3')],
             [InlineKeyboardButton('한 대각선의 길이는 40cm이고 다른 대각선의 길이는 50cm니까 식이 20×50÷2야', callback_data='4')]
         ],
         10 : [
             [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 9cm니까 식은 7×9÷2야', callback_data='1')],
-            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 9cm니까 식은 7×9가 맞아', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 9cm니까 식은 7×9×2가 맞아', callback_data='2')],
             [InlineKeyboardButton('밑변의 길이는 9cm이고 높이는 7cm니까 식은 9×7÷2라고 세우면 돼', callback_data='3')],
             [InlineKeyboardButton('밑변의 길이는 9cm이고 높이는 7cm이기 때문에 식을 구해보면 9×7이 나와.', callback_data='4')]
         ],
@@ -1045,51 +1426,51 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('가로는 105cm이고 세로는 60cm니까 식은 105×60라고 세우면 돼', callback_data='4')]
         ],
         12 : [
-            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변의 길이는 10cm니까 식은 12+10이야', callback_data='1')],
-            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변의 길이는 10cm니까 식은 (12+10)×2가 나와', callback_data='2')],
-            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변의 길이는 8cm니까 (12+8)×2가 맞는 식이야', callback_data='3')],
-            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변의 길이는 8cm라서 12×8으로 구하면 돼', callback_data='4')]
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변은 10cm니까 식은 12+10이야', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변이 10cm니까 식은 (12+10)×2가 나와', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변은 8cm니까 (12+8)×2가 맞는 식이야', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이는 12cm이고 다른 변이 8cm라서 12×8으로 구하면 돼', callback_data='4')]
         ],
         13 : [
-            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변의 길이는 9cm, 높이는 7cm니까 식은 (15+9)×7÷2가 맞아.', callback_data='1')],
-            [InlineKeyboardButton('윗변의 길이는 15cm이고 높이는 7cm니까 식을 구하면 15×72가 나와.', callback_data='2')],
-            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변의 길이는 9cm, 높이는 9cm니까 식은 (15+9)×9÷2야.', callback_data='3')],
-            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변의 길이는 9cm, 높이는 7cm니까 식은 (15+9)×7이야.', callback_data='4')]
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변이 9cm, 높이는 7cm니까 (15+9)×7÷2가 맞아', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 높이는 7cm니까 식을 구하면 15×72가 나와', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변은 9cm, 높이는 9cm니까 식은 (15+9)×9÷2야', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변은 9cm, 높이는 7cm니까 식은 (15+9)×7이야', callback_data='4')]
         ],
         14 : [
-            [InlineKeyboardButton('밑변의 길이는 12cm이고 높이는 7cm니까 식은 12×7÷2가 맞아.', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 12cm이고 높이는 7cm니까 식은 12×7÷2가 맞아', callback_data='1')],
             [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 12cm니까 식을 구해보면 7×12가 나와', callback_data='2')],
-            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 12cm니까 식은 7×12÷2야.', callback_data='3')],
-            [InlineKeyboardButton('밑변의 길이는 12cm이고 높이는 7cm니까 식은 12×7이야.', callback_data='4')]
+            [InlineKeyboardButton('밑변의 길이는 7cm이고 높이는 12cm니까 식은 7×12÷2야', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 12cm이고 높이는 7cm니까 식은 12×7이야', callback_data='4')]
         ],
         15 : [
-            [InlineKeyboardButton('밑변의 길이는 30cm이고 높이는 80cm니까 30×80가 맞아.', callback_data='1')],
-            [InlineKeyboardButton('밑변의 길이는 30cm이고 높이는 80cm이기 때문에 식은 30×80÷2가 맞아.', callback_data='2')],
-            [InlineKeyboardButton('밑변의 길이는 80cm이고 높이는 30cm니까 식은 80×30라고 세우면 돼.', callback_data='3')],
-            [InlineKeyboardButton('밑변의 길이는 80cm이고 높이는 30cm라서 식은 80×30÷2야.', callback_data='4')]
+            [InlineKeyboardButton('밑변의 길이는 30cm이고 높이는 80cm니까 30×80가 맞아', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 30cm이고 높이는 80cm이기 때문에 식은 30×80÷2가 맞아', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 80cm이고 높이는 30cm니까 식은 80×30라고 세우면 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 80cm이고 높이는 30cm라서 식은 80×30÷2야', callback_data='4')]
         ],
         16 : [
-            [InlineKeyboardButton('윗변의 길이는 5cm, 아랫변의 길이는 15cm, 높이는 6cm니까 식은 (5+15)×6라고 세우면 돼', callback_data='1')],
-            [InlineKeyboardButton('윗변의 길이는 5cm, 아랫변의 길이는 15cm, 높이는 6cm니까 (5+15)×6÷2가 맞는 식이야', callback_data='2')],
-            [InlineKeyboardButton('아랫변의 길이는 15cm이고 높이는 6cm이기 때문에 식을 세우면 15×6÷2가 돼.', callback_data='3')],
-            [InlineKeyboardButton('윗변의 길이는 5cm, 아랫변의 길이는 15cm, 높이는 6cm니까 (5+15)×6이 맞아', callback_data='4')]
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변은 15, 높이가 6이니까 식은 (5+15)×6이야', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 15, 높이는 6이니까 (5+15)×6÷2야', callback_data='2')],
+            [InlineKeyboardButton('아랫변의 길이는 15이고 높이는 6이기 때문에 식을 세우면 15×6÷2가 돼', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 15, 높이는 6이니까 (5+15)×6이 맞아', callback_data='4')]
         ],
         17 : [
             [InlineKeyboardButton('한 대각선의 길이는 4cm이고 다른 대각선의 길이는 6cm니까 4×6가 맞아', callback_data='1')],
             [InlineKeyboardButton('한 대각선의 길이는 6cm, 다른 대각선의 길이는 4cm이기 때문에 식은 (4+6)×2야', callback_data='2')],
-            [InlineKeyboardButton('한 대각선의 길이는 6cm, 다른 대각선의 길이는 6cm니까 4×6÷2가 맞는 식이야', callback_data='3')],
-            [InlineKeyboardButton('한 대각선의 길이는 4cm, 다른 대각선의 길이는 6cm니까 4×6÷2라고 세울 수 있어', callback_data='4')]
+            [InlineKeyboardButton('한 대각선의 길이는 6cm, 다른 대각선의 길이는 6cm니까 4×6÷2야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 4cm, 다른 대각선의 길이는 6cm니까 4×6÷2가 돼', callback_data='4')]
         ],
         18 : [
-            [InlineKeyboardButton('가로는 20cm이고, 세로는 9cm이니까 20+9+9가 돼', callback_data='1')],
+            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm이니까 20+9+9가 돼', callback_data='1')],
             [InlineKeyboardButton('가로는 20cm니까 식을 구해보면 20+20이 돼', callback_data='2')],
             [InlineKeyboardButton('세로가 9cm니까 식을 세워보면 9×4가 돼', callback_data='3')],
-            [InlineKeyboardButton('가로가 20cm니까 식으로 표현하면 20×4가 돼', callback_data='4')]
+            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm이니까 (20+9)×2가 돼', callback_data='4')]
         ],
         19 : [
-            [InlineKeyboardButton('윗변의 길이는 24, 아랫변의 길이는 4, 높이는 15니까 (24+4)×15÷2가 돼', callback_data='1')],
-            [InlineKeyboardButton('윗변의 길이는 24, 아랫변의 길이는 15, 높이는 4이니까 식을 세워 보면 (24+15)×4÷2가 나와', callback_data='2')],
-            [InlineKeyboardButton('윗변의 길이는 24, 아랫변의 길이는 4, 높이는 15니까 식을 세워 보면 (24+4)×15가 돼.', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 24, 아랫변이 4, 높이는 15니까 (24+4)×15÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 24, 아랫변이 15, 높이는 4니까 식은 (24+15)×4÷2가 나와', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 24, 아랫변이 4, 높이는 15니까 식은 (24+4)×15가 돼', callback_data='3')],
             [InlineKeyboardButton('높이는 15, 아랫변의 길이는 4니까 식을 세워 보면 15×4÷2가 돼', callback_data='4')]
         ],
         20: [
@@ -1105,46 +1486,46 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('가로는 7cm니까 식은 7×7이야.', callback_data='4')]
         ],
         22 : [
-            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 18이기 때문에 식은 30×18이 돼', callback_data='1')],
-            [InlineKeyboardButton('한 대각선의 길이는 15, 다른 대각선의 길이는 18이기 때문에 15×18이야', callback_data='2')],
-            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 18이기 때문에 식을 구해보면 30×18÷2야', callback_data='3')],
-            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 9이기 때문에 30×9÷2가 돼', callback_data='4')]
+            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 18이어서 식은 30×18이 돼', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 15, 다른 대각선의 길이는 18이므로 15×18이야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 18이라 식은 30×18÷2야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 30, 다른 대각선의 길이는 9니까 30×9÷2가 돼', callback_data='4')]
         ],
         23 : [
-            [InlineKeyboardButton('밑변의 길이는 4cm이고, 높이는 20cm이기 때문에 식을 세워보면 4×20이 돼.', callback_data='1')],
-            [InlineKeyboardButton('밑변의 길이는 4cm이고, 높이는 20cm이기 때문에 식은 4×20÷2가 돼.', callback_data='2')],
-            [InlineKeyboardButton('밑변의 길이는 20cm이고, 높이는 4cm이기 때문에 식을 구해보면 20×4가 돼', callback_data='3')],
-            [InlineKeyboardButton('밑변의 길이는 16cm이고, 높이는 20cm이기 때문에 식을 세워보면 16×20÷2가 돼.', callback_data='4')]
+            [InlineKeyboardButton('밑변의 길이는 4이고, 높이는 20이기 때문에 식을 구하면 4×20이 돼', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 4이고, 높이는 20이기 때문에 식은 4×20÷2가 돼', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 20이고, 높이는 4이기 때문에 식이 20×4가 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 16이고, 높이는 20이기 때문에 식은 16×20÷2가 돼', callback_data='4')]
         ],
         24 : [
-            [InlineKeyboardButton('한 변의 길이는 9cm니까 식을 구해보면 9×7가 돼', callback_data='1')],
-            [InlineKeyboardButton('한 변의 길이는 9cm니까 식으로 표현하면 9×6이 돼', callback_data='2')],
-            [InlineKeyboardButton('한 변의 길이는 18cm니까 식으로 표현하면 18×7이야', callback_data='3')],
-            [InlineKeyboardButton('한 변의 길이는 9cm니까 식을 세워보면 9×8이야', callback_data='4')]
+            [InlineKeyboardButton('한 변의 길이는 9cm, 변의 수는 7개니까 식을 구해보면 9×7가 돼', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이는 9cm, 변의 수는 6개니까 9×6이 돼', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이는 18cm, 변의 수는 7개니까 식은 18×7이야', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이는 9cm, 변의 수가 8개니까 식을 세워보면 9×8이야', callback_data='4')]
         ],
         25 : [
-            [InlineKeyboardButton('윗변의 길이는 9, 아랫변의 길이는 14, 높이는 12니까 (9+14)×12÷2가 돼', callback_data='1')],
-            [InlineKeyboardButton('윗변의 길이는 12, 아랫변의 길이는 14, 높이는 9니까 식을 세워 보면 (12+14)×9÷2가 나와', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 9, 아랫변이 14, 높이는 12니까 (9+14)×12÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('윗변의 길이는 12, 아랫변은 14, 높이는 9니까 식이 (12+14)×9÷2가 나와', callback_data='2')],
             [InlineKeyboardButton('윗변의 길이는 9, 높이는 12니까 식을 세워 보면 9×12÷2가 돼.', callback_data='3')],
             [InlineKeyboardButton('높이는 12, 아랫변의 길이는 14니까 식을 세워 보면 12×14÷2가 돼.', callback_data='4')]
         ],
         26 : [
             [InlineKeyboardButton('종이의 밑변은 25, 높이는 16이기 때문에 식을 구해보면 25×16이 돼', callback_data='1')],
             [InlineKeyboardButton('종이의 밑변은 25, 높이는 16이기 때문에 식을 구해보면 25×16÷2가 돼', callback_data='2')],
-            [InlineKeyboardButton('종이의 밑변은 16, 높이는 25이기 때문에 식은 16×25÷2가 되는 것 같아', callback_data='3')],
+            [InlineKeyboardButton('종이의 밑변은 16, 높이는 25이기 때문에 식은 16×25÷2야', callback_data='3')],
             [InlineKeyboardButton('종이의 밑변은 50, 높이는 16이기 때문에 식은 50×16이야', callback_data='4')]
         ],
         27 : [
-            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 24이기 때문에 식은 10×24가 돼', callback_data='1')],
-            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 13이기 때문에 10×13이 돼', callback_data='2')],
-            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 13이기 때문에 10×13÷2가 돼', callback_data='3')],
-            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 24이기 때문에 10×24÷2가 돼', callback_data='4')]
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 24이므로 식은 10×24야', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 13이어서 10×13이야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 13이니까 10×13÷2이야', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 10, 다른 대각선의 길이는 24이기 때문에 10×24÷2야', callback_data='4')]
         ],
         28 : [
-            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식을 세워보면, 150×90÷2가 돼', callback_data='1')],
-            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식을 세워보면, 150×90가 돼', callback_data='2')],
-            [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 150cm이기 때문에 식을 세워보면, 180×150÷2가 돼', callback_data='3')],
-            [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 90cm이기 때문에 식을 세워보면, 180×90÷2가 돼', callback_data='4')]
+            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식은 150×90÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식이 150×90가 돼', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 150cm이니까 식은 180×150÷2가 돼', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 90cm니까 식을 만들면 180×90÷2가 돼', callback_data='4')]
         ],
         29 : [
             [InlineKeyboardButton('가로는 6cm니까 식은 6×6이야', callback_data='1')],
@@ -1153,10 +1534,10 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('가로는 6cm이고 세로는 12cm이니까 식을 구해보면 6×12야', callback_data='4')]
         ],
         30 : [
-            [InlineKeyboardButton('한 변의 길이는 6cm니까 6×2가 돼', callback_data='1')],
-            [InlineKeyboardButton('한 변은 6cm니까 테두리의 길이는 6×3이 돼', callback_data='2')],
-            [InlineKeyboardButton('한 변의 길이가 6cm니까 테두리는 6×3÷2가 돼', callback_data='3')],
-            [InlineKeyboardButton('한 변의 길이가 3cm니까 테두리는 3×3이 돼', callback_data='4')]
+            [InlineKeyboardButton('한 변의 길이는 6cm이고, 변의 개수가 2개니까 6×2가 돼', callback_data='1')],
+            [InlineKeyboardButton('한 변은 6cm이고 변의 개수는 3개니까 테두리의 길이는 6×3이 돼', callback_data='2')],
+            [InlineKeyboardButton('한 변의 길이가 6cm이고 변은 3개니까 테두리는 6×3÷2가 돼', callback_data='3')],
+            [InlineKeyboardButton('한 변의 길이가 3cm니까 변은 3개니까 테두리는 3×3이 돼', callback_data='4')]
         ],
         31 : [
             [InlineKeyboardButton('한 변의 길이는 11m이기 때문에 식을 구해보면 11×11이 돼', callback_data='1')],
@@ -1171,23 +1552,23 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('밑변은 5cm이고 높이는 15cm라서 식을 만들어보면 5×15야', callback_data='4')]
         ],
         33 : [
-            [InlineKeyboardButton('밑변의 길이는 20cm, 높이는 15cm이기 때문에 식을 세워보면, 20×15÷2가 돼', callback_data='1')],
-            [InlineKeyboardButton('밑변의 길이는 25cm, 높이는 15cm라서 식을 세워보면, 25×15÷2가 돼', callback_data='2')],
-            [InlineKeyboardButton('밑변의 길이는 20cm, 높이는 15cm이기 때문에 식을 세워보면, 20×15가 되네', callback_data='3')],
-            [InlineKeyboardButton('밑변의 길이는 15cm, 높이는 25cm이기 때문에 식을 만들어보면 15×25÷2가 나와', callback_data='4')]
+            [InlineKeyboardButton('밑변의 길이는 20cm, 높이는 15cm이므로 식을 구하면 20×15÷2가 돼', callback_data='1')],
+            [InlineKeyboardButton('밑변의 길이는 25cm, 높이는 15cm라서 식은 25×15÷2가 돼', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 20cm, 높이는 15cm여서 식을 세우면 20×15가 되네', callback_data='3')],
+            [InlineKeyboardButton('밑변의 길이는 15cm, 높이는 25cm이므로 식은 15×25÷2가 나와', callback_data='4')]
         ],
         34 : [
-            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 10이기 때문에 식은 18×10이 돼', callback_data='1')],
-            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 5이기 때문에 18×52÷2가 돼', callback_data='2')],
-            [InlineKeyboardButton('한 대각선의 길이는 9, 다른 대각선의 길이는 10이기 때문에 9×10÷2가 돼', callback_data='3')],
-            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 10이기 때문에 18×10÷2가 돼', callback_data='4')]
+            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 10이어서 식은 18×10이야', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 5이므로 18×5÷2야', callback_data='2')],
+            [InlineKeyboardButton('한 대각선의 길이는 9, 다른 대각선의 길이는 10이니까 9×10÷2가 나와', callback_data='3')],
+            [InlineKeyboardButton('한 대각선의 길이는 18, 다른 대각선의 길이는 10이니까 18×10÷2야', callback_data='4')]
         ],
         35: [
             [InlineKeyboardButton('윗변의 길이는 6, 아랫변의 길이는 10, 높이는 5니까 (6+10)×5÷2가 돼', callback_data='1')],
-            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 10, 높이는 6이니까 식을 세워 보면 (5+10)×6÷2가 나와.', callback_data='2')],
-            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 10, 높이는 6이니까 식을 세워 보면 (5+10)×6가 돼.', callback_data='3')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 10, 높이는 6이니까 식을 구하면 (5+10)×6÷2가 나와.', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 10, 높이는 6이니까 식이 (5+10)×6가 돼.', callback_data='3')],
             [InlineKeyboardButton('윗변의 길이는 6, 아랫변의 길이는 10, 높이는 5니까 (6+10)×5가 돼', callback_data='4')]
-        ],
+        ]
 
     }
     reply_markup = InlineKeyboardMarkup(submit_button[question_id])
@@ -1548,9 +1929,49 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_30_ADDED: [
-                CallbackQueryHandler(end, pattern="^설명 마치기"),
+                CallbackQueryHandler(question_31, pattern="^(1|2|3|4)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
-            ]
+            ],
+            QUESTION_31: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_31_ADDED: [
+                CallbackQueryHandler(question_32, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_32: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_32_ADDED: [
+                CallbackQueryHandler(question_33, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_33: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_33_ADDED: [
+                CallbackQueryHandler(question_34, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_34: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_34_ADDED: [
+                CallbackQueryHandler(question_35, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_35: [
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            QUESTION_35_ADDED: [
+                CallbackQueryHandler(end, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )

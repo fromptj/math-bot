@@ -95,7 +95,7 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그럼 1번 문제부터 시작해보자!',
+        text='그럼 1번 문제부터 풀어볼게!',
     )
 
     await context.bot.send_photo(
@@ -107,7 +107,7 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 18900÷21이야.\n\n내가 구한 답이 맞니?",
+        text="내가 구한 답은 18900÷21이야.\n\n내가 구한 답이 맞니?🤔",
         reply_markup=reply_markup
     )
 
@@ -124,7 +124,7 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 2번 문제야!',
+        text='알려줘서 고마워! 다음은 2번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -153,7 +153,7 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 3번 문제야!',
+        text='아하 그렇게 생각했구나~!!! 다음은 3번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -182,7 +182,7 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 4번 문제야!',
+        text='너가 도와줘서 문제 푸는게 재밌어😙 다음은 4번 문제야!',
     )
 
     await context.bot.send_photo(
@@ -194,7 +194,7 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 (5+4+2+1)÷4라고 생각해.\n\n내 답이 맞을까?",
+        text="나는 답이 (5+4+2+1)÷4라고 생각해.\n\n어때? 내 답이 맞을까?🧐",
         reply_markup=reply_markup
     )
 
@@ -211,7 +211,7 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text='그렇구나! 다음은 5번 문제야!',
+        text='알려줘서 고마워! 다음은 5번 문제야~',
     )
 
     await context.bot.send_photo(
@@ -334,7 +334,7 @@ async def callback_second(context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     load_dotenv()
-    application = Application.builder().token(os.environ.get('ot_math_bot')).build()
+    application = Application.builder().token(os.environ.get('otc_math_bot')).build()
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
