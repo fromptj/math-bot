@@ -111,9 +111,51 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     return QUESTION_1
 
-async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
+async def answer_1(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, "ha", question_id, user.id)
+    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
+
+    answer_o_text = ["내가 맞았구나!🥳\n답을 구하는 과정을 설명해줄 수 있니?",
+                   "와 맞았다!!😆\n답을 구하는 과정을 설명해줄래?",
+                   "내 답이 맞다니 다행이야😉\n답을 구하는 과정은 어떻게 되니?",
+                   "내가 맞았구나🤩\n어떻게 답을 구하는지 한 번 설명해줄래?"]
+
+    answer_x_text = ["내 답이 틀렸구나ㅠㅠ\n그럼 답을 구하는 과정을 설명해줄래?",
+                   "앗 내가 틀렸구나😭\n답을 구하는 과정은 어떻게 되니?",
+                   "내가 잘못 풀었구나🥲\n어떻게 답을 구할 수 있는지 설명해줄래?",
+                   "내가 틀리게 풀었구나ㅠ_ㅠ\n답을 구하는 법을 설명해줄 수 있니?"]
+
+    submit_button = [
+        [InlineKeyboardButton('밑변의 길이는 16cm, 높이는 14cm이기 때문에 식을 세워보면, 14×16÷2가 돼', callback_data='1')],
+        [InlineKeyboardButton('밑변의 길이는 16cm, 높이는 16cm라서 식을 세워보면, 16×16÷2이다.', callback_data='2')],
+        [InlineKeyboardButton('밑변의 길이는 16cm, 높이는 14cm이기 때문에 식을 세워보면, 16×14이다.', callback_data='3')],
+        [InlineKeyboardButton('밑변의 길이는 14cm, 높이는 16cm이기 때문에 식을 세워보면, 14×16÷2가 나온다.', callback_data='4')]
+    ]
+
+    reply_markup = InlineKeyboardMarkup(submit_button)
+
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text= answer_o_text[question_id % 4] if update.callback_query.data == "맞아" else answer_x_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
+        reply_markup=reply_markup
+    )
+
+    return 2 * question_id
+
+async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    user = update.callback_query.from_user
+    chat_id = update.callback_query.message.chat.id
+    question_id = context.user_data["question_id"]
+
+    args = (chat_id, update.callback_query.data, "ha", question_id, user.id)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    db.commit()
 
     await context.bot.send_message(
         chat_id=chat_id,
@@ -1064,13 +1106,12 @@ if __name__ == '__main__':
                 #MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer_1, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1_ADDED: [
-                CallbackQueryHandler(question_2, pattern="^설명 마치기"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                CallbackQueryHandler(question_2, pattern="^(1|2|3|4)"),
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_2: [
                 CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
