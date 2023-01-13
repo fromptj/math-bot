@@ -1591,10 +1591,10 @@ async def answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
-    answer_text = ["내가 맞았구나!🥳 답을 구하는 과정을 설명해줄 수 있니?",
-                   "와 맞았다!!😆 답을 구하는 과정을 설명해줄래?",
-                   "내 답이 맞다니 다행이야😉 답을 구하는 과정은 어떻게 되니?",
-                   "내가 맞았구나🤩 어떻게 답을 구하는지 한 번 설명해줄래?"]
+    answer_text = ["내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "와 맞았다!!😆\n답을 구하는 과정을 설명해줄래?",
+        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "나 맞았네!!🤩\n어떻게 답을 구하는지 한 번 설명해줄래?"]
 
     submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)

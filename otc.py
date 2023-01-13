@@ -64,17 +64,10 @@ async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
 async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
-    '''
-    cursor.execute('SELECT question_id FROM messages GROUP BY user_id ORDER BY created_at DESC limit 1');
-    record = cursor.fetchall()
-    print(record[0][0])
-    print(type(record[0][0]))
-    question_id_checker = record[0][0] if record else 6
-    '''
     chat_id = update.message.chat.id
 
     await context.bot.send_message(
-        chat_id=chat_id, text="안녕 반가워! 나는 오늘 너와 함께 공부할 챗봇이야.\n내가 문제 5개를 풀었는데, 내 답이 맞았는지 틀렸는지에 대해 조언을 부탁할게!"
+        chat_id=chat_id, text="안녕 반가워😊 나는 오늘 너와 함께 공부할 연습용 챗봇이야.\n내가 문제 5개를 풀었는데, 내 답이 맞았는지 틀렸는지에 대해 조언을 부탁할게!"
     )
 
     start_button = [[InlineKeyboardButton('준비됐어', callback_data='준비됐어')]]
@@ -234,43 +227,36 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
     return QUESTION_5
 
-async def answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, "ot", question_id, user.id)
+    args = (chat_id, update.callback_query.data, "otc", question_id, user.id)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
     cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
+
+    answer_o_text = [
+        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "와 맞았다!!😆\n답을 구하는 과정을 설명해줄래?",
+        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "나 맞았네!!🤩\n어떻게 답을 구하는지 한 번 설명해줄래?"
+    ]
+
+    answer_x_text = [
+        "내 답이 틀렸구나ㅠㅠ\n그럼 답을 구하는 과정을 설명해줄래?",
+        "앗 내가 틀렸구나😭\n그럼 답을 구하는 과정은 어떻게 되니?",
+        "내 답이 틀렸구나ㅠ🥲\n그럼 답을 구하는 과정을 설명해줄래?",
+        "내가 틀리게 풀었구나ㅠ_ㅠ\n그럼 답을 구하는 법을 설명해줄 수 있니?"
+    ]
 
     submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
     reply_markup = InlineKeyboardMarkup(submit_button)
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내 답이 맞았구나!\n어떻게 답이 나왔는지 설명해줄래?",
-        reply_markup=reply_markup
-    )
-
-    return 2 * question_id
-
-async def answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    user = update.callback_query.from_user
-    chat_id = update.callback_query.message.chat.id
-    question_id = context.user_data["question_id"]
-
-    args = (chat_id, update.callback_query.data, "ot", question_id, user.id)
-    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
-    db.commit()
-
-    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
-    reply_markup = InlineKeyboardMarkup(submit_button)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="내 답이 틀렸구나ㅠㅠ\n왜 틀렸는지 설명해줄래?",
+        text= answer_o_text[question_id % 4] if update.callback_query.data == "맞아" else answer_x_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
         reply_markup=reply_markup
     )
 
@@ -347,8 +333,7 @@ if __name__ == '__main__':
                 #MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_1_ADDED: [
@@ -356,8 +341,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_2: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_2_ADDED: [
@@ -365,8 +349,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_3: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_3_ADDED: [
@@ -374,8 +357,7 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_4: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_4_ADDED: [
@@ -383,14 +365,14 @@ if __name__ == '__main__':
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
             QUESTION_5: [
-                CallbackQueryHandler(answer_o, pattern="^\s*맞아\s*"),
-                CallbackQueryHandler(answer_x, pattern="^\s*틀렸어\s*"),
+                CallbackQueryHandler(answer, pattern="^(맞|틀)"),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_5_ADDED: [
                 CallbackQueryHandler(end, pattern="^설명 마치기"),
                 MessageHandler(filters.Regex("^[^/cancel]"), explanation)
             ],
+
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
