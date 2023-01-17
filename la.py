@@ -53,7 +53,7 @@ async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     user = update.message.from_user
     chat_id = update.message.chat.id
 
-    args = (chat_id, "la", context.user_data["question_id"], user.id, update.message.text)
+    args = (chat_id, mode, context.user_data["question_id"], user.id, update.message.text)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
     cursor.execute('INSERT INTO messages (chat_id, cond, question_id, user_id, explanation) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
