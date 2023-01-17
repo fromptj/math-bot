@@ -53,7 +53,7 @@ async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     user = update.message.from_user
     chat_id = update.message.chat.id
 
-    args = (chat_id, "ha", context.user_data["question_id"], user.id, update.message.text)
+    args = (chat_id, mode, context.user_data["question_id"], user.id, update.message.text)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
     cursor.execute('INSERT INTO messages (chat_id, cond, question_id, user_id, explanation) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
@@ -1576,58 +1576,6 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await context.bot.send_message(
         chat_id=chat_id,
         text= answer_o_text[question_id % 4] if update.callback_query.data == "맞아" else answer_x_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
-        reply_markup=reply_markup
-    )
-
-    return 2 * question_id
-
-async def answer_o(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    user = update.callback_query.from_user
-    chat_id = update.callback_query.message.chat.id
-    question_id = context.user_data["question_id"]
-
-    args = (chat_id, update.callback_query.data, "ha", question_id, user.id)
-    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
-    db.commit()
-
-    answer_text = ["내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
-        "와 맞았다!!😆\n답을 구하는 과정을 설명해줄래?",
-        "내 답이 맞다니 다행이야😉\n그럼 답을 구하는 과정은 어떻게 되니?",
-        "나 맞았네!!🤩\n어떻게 답을 구하는지 한 번 설명해줄래?"]
-
-    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
-    reply_markup = InlineKeyboardMarkup(submit_button)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text=answer_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
-        reply_markup=reply_markup
-    )
-
-    return 2 * question_id
-
-async def answer_x(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    user = update.callback_query.from_user
-    chat_id = update.callback_query.message.chat.id
-    question_id = context.user_data["question_id"]
-
-    args = (chat_id, update.callback_query.data, "ha", question_id, user.id)
-    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
-    db.commit()
-
-    answer_text = ["내 답이 틀렸구나ㅠㅠ 그럼 답을 구하는 과정을 설명해줄래?",
-                   "앗 내가 틀렸구나😭 답을 구하는 과정은 어떻게 되니?",
-                   "내가 잘못 풀었구나🥲 어떻게 답을 구할 수 있는지 설명해줄래?",
-                   "내가 틀리게 풀었구나ㅠ_ㅠ 답을 구하는 법을 설명해줄 수 있니?"]
-
-    submit_button = [[InlineKeyboardButton('설명 마치기',  callback_data='설명 마치기')]]
-    reply_markup = InlineKeyboardMarkup(submit_button)
-
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text=answer_text[question_id % 4], # % 뒤의 숫자는 answer_text의 개수만큼으로 한다
         reply_markup=reply_markup
     )
 
