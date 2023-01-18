@@ -800,7 +800,7 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (9+14)×12÷2인데,\n\n내가 구한 결과가 어떻다고 생각해?",
+        text="내가 생각한 답은 9×12÷2인데,\n\n내가 구한 결과가 어떻다고 생각해?",
         reply_markup=reply_markup
     )
 
@@ -974,7 +974,7 @@ async def question_31 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, (12+10)×2가 나왔어!!\n\n내가 구한 게 정답일까??",
+        text="답을 구해보니, 11×11이 나왔어!!\n\n내가 구한 게 정답일까??",
         reply_markup=reply_markup
     )
 
@@ -1003,7 +1003,7 @@ async def question_32 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (15+9)×7÷2야~\n\n내가 잘 풀은걸까?🧐",
+        text="내가 생각한 답은 15×4야~\n\n내가 잘 풀은걸까?🧐",
         reply_markup=reply_markup
     )
 
@@ -1032,7 +1032,7 @@ async def question_33 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 7×12÷2라고 생각해!!\n\n너는 내 답이 맞았다고 생각해??",
+        text="나는 답이 20×15÷2라고 생각해!!\n\n너는 내 답이 맞았다고 생각해??",
         reply_markup=reply_markup
     )
 
@@ -1061,7 +1061,7 @@ async def question_34 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 30×80÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 18×10÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -1090,7 +1090,7 @@ async def question_35 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 (5+15)×6÷2야!\n\n너는 내 답에 대해 어떻게 생각해??",
+        text="내가 구한 답은 (5+10)×6÷2야!\n\n너는 내 답에 대해 어떻게 생각해??",
         reply_markup=reply_markup
     )
 

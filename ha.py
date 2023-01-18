@@ -963,7 +963,7 @@ async def question_25 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (9+14)×12÷2인데,\n\n내가 구한 결과가 어떻다고 생각해?",
+        text="내가 생각한 답은 9×12÷2인데,\n\n내가 구한 결과가 어떻다고 생각해?",
         reply_markup=reply_markup
     )
 
@@ -1179,7 +1179,7 @@ async def question_31 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="답을 구해보니, (12+10)×2가 나왔어!!\n\n내가 구한 게 정답일까??",
+        text="답을 구해보니, 11×11이 나왔어!!\n\n내가 구한 게 정답일까??",
         reply_markup=reply_markup
     )
 
@@ -1215,7 +1215,7 @@ async def question_32 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 (15+9)×7÷2야~\n\n내가 잘 풀은걸까?🧐",
+        text="내가 생각한 답은 15×4야~\n\n내가 잘 풀은걸까?🧐",
         reply_markup=reply_markup
     )
 
@@ -1251,7 +1251,7 @@ async def question_33 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="나는 답이 7×12÷2라고 생각해!!\n\n너는 내 답이 맞았다고 생각해??",
+        text="나는 답이 20×15÷2라고 생각해!!\n\n너는 내 답이 맞았다고 생각해??",
         reply_markup=reply_markup
     )
 
@@ -1287,7 +1287,7 @@ async def question_34 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 30×80÷2야.\n\n내가 구한 게 맞았니?",
+        text="내가 생각한 답은 18×10÷2야.\n\n내가 구한 게 맞았니?",
         reply_markup=reply_markup
     )
 
@@ -1323,7 +1323,7 @@ async def question_35 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 답은 (5+15)×6÷2야!\n\n너는 내 답에 대해 어떻게 생각해??",
+        text="내가 구한 답은 (5+10)×6÷2야!\n\n너는 내 답에 대해 어떻게 생각해??",
         reply_markup=reply_markup
     )
 
@@ -1373,7 +1373,7 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ],
         3 : [
             [InlineKeyboardButton('윗변의 길이는 140, 아랫변의 길이는 200, 높이는 60니까 (140+200)×60÷2야', callback_data='1')],
-            [InlineKeyboardButton('윗변의 길이는 200, 아랫변의 길이는 60, 높이는 140이니까 식은 (200+60)×14÷2야', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 200, 아랫변의 길이는 60, 높이는 140이니까 식은 (200+60)×140÷2야', callback_data='2')],
             [InlineKeyboardButton('윗변의 길이는 60, 아랫변의 길이는 140, 높이는 200이니까 식은 (60+140)×200÷2야', callback_data='3')],
             [InlineKeyboardButton('윗변의 길이는 60, 아랫변의 길이는 140, 높이는 200이니까 식은 (60+140)×200이야', callback_data='4')]
         ],
@@ -1422,7 +1422,7 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         11 : [
             [InlineKeyboardButton('가로는 105cm이고 세로는 68cm니까 식은 105+68이야', callback_data='1')],
             [InlineKeyboardButton('가로는 105cm이고 세로는 68cm이기 때문에 식을 구하면 105×68이 나와', callback_data='2')],
-            [InlineKeyboardButton('가로는 105cm이고 세로는 68cm라서 식은 (105+68)÷2가 맞아', callback_data='3')],
+            [InlineKeyboardButton('가로는 105cm이고 세로는 68cm라서 식은 (105+68)×2가 맞아', callback_data='3')],
             [InlineKeyboardButton('가로는 105cm이고 세로는 60cm니까 식은 105×60라고 세우면 돼', callback_data='4')]
         ],
         12 : [
@@ -1433,7 +1433,7 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ],
         13 : [
             [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변이 9cm, 높이는 7cm니까 (15+9)×7÷2가 맞아', callback_data='1')],
-            [InlineKeyboardButton('윗변의 길이는 15cm이고 높이는 7cm니까 식을 구하면 15×72가 나와', callback_data='2')],
+            [InlineKeyboardButton('윗변의 길이는 15cm이고 높이는 7cm니까 식을 구하면 15×7÷2가 나와', callback_data='2')],
             [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변은 9cm, 높이는 9cm니까 식은 (15+9)×9÷2야', callback_data='3')],
             [InlineKeyboardButton('윗변의 길이는 15cm이고 아랫변은 9cm, 높이는 7cm니까 식은 (15+9)×7이야', callback_data='4')]
         ],
@@ -1456,16 +1456,16 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('윗변의 길이는 5, 아랫변의 길이는 15, 높이는 6이니까 (5+15)×6이 맞아', callback_data='4')]
         ],
         17 : [
-            [InlineKeyboardButton('한 대각선의 길이는 4cm이고 다른 대각선의 길이는 6cm니까 4×6가 맞아', callback_data='1')],
+            [InlineKeyboardButton('한 대각선의 길이는 4cm이고 다른 대각선의 길이는 6cm니까 4×6이 맞아', callback_data='1')],
             [InlineKeyboardButton('한 대각선의 길이는 6cm, 다른 대각선의 길이는 4cm이기 때문에 식은 (4+6)×2야', callback_data='2')],
             [InlineKeyboardButton('한 대각선의 길이는 6cm, 다른 대각선의 길이는 6cm니까 4×6÷2야', callback_data='3')],
             [InlineKeyboardButton('한 대각선의 길이는 4cm, 다른 대각선의 길이는 6cm니까 4×6÷2가 돼', callback_data='4')]
         ],
         18 : [
-            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm이니까 20+9+9가 돼', callback_data='1')],
+            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm니까 20+9+9가 돼', callback_data='1')],
             [InlineKeyboardButton('가로는 20cm니까 식을 구해보면 20+20이 돼', callback_data='2')],
             [InlineKeyboardButton('세로가 9cm니까 식을 세워보면 9×4가 돼', callback_data='3')],
-            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm이니까 (20+9)×2가 돼', callback_data='4')]
+            [InlineKeyboardButton('가로는 20cm이고 세로는 9cm니까 (20+9)×2가 돼', callback_data='4')]
         ],
         19 : [
             [InlineKeyboardButton('윗변의 길이는 24, 아랫변이 4, 높이는 15니까 (24+4)×15÷2가 돼', callback_data='1')],
@@ -1523,7 +1523,7 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ],
         28 : [
             [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식은 150×90÷2가 돼', callback_data='1')],
-            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식이 150×90가 돼', callback_data='2')],
+            [InlineKeyboardButton('밑변의 길이는 150cm, 높이는 90cm이기 때문에 식이 150×90이 돼', callback_data='2')],
             [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 150cm이니까 식은 180×150÷2가 돼', callback_data='3')],
             [InlineKeyboardButton('밑변의 길이는 180cm, 높이는 90cm니까 식을 만들면 180×90÷2가 돼', callback_data='4')]
         ],
@@ -1534,10 +1534,10 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             [InlineKeyboardButton('가로는 6cm이고 세로는 12cm이니까 식을 구해보면 6×12야', callback_data='4')]
         ],
         30 : [
-            [InlineKeyboardButton('한 변의 길이는 6cm이고, 변의 개수가 2개니까 6×2가 돼', callback_data='1')],
+            [InlineKeyboardButton('한 변의 길이는 6cm이고 변의 개수가 2개니까 6×2가 돼', callback_data='1')],
             [InlineKeyboardButton('한 변은 6cm이고 변의 개수는 3개니까 테두리의 길이는 6×3이 돼', callback_data='2')],
             [InlineKeyboardButton('한 변의 길이가 6cm이고 변은 3개니까 테두리는 6×3÷2가 돼', callback_data='3')],
-            [InlineKeyboardButton('한 변의 길이가 3cm니까 변은 3개니까 테두리는 3×3이 돼', callback_data='4')]
+            [InlineKeyboardButton('한 변의 길이가 3cm이고 변은 3개니까 테두리는 3×3이 돼', callback_data='4')]
         ],
         31 : [
             [InlineKeyboardButton('한 변의 길이는 11m이기 때문에 식을 구해보면 11×11이 돼', callback_data='1')],
