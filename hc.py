@@ -115,9 +115,8 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_1
 
 async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    user = update.callback_query.from_user
+
     chat_id = update.callback_query.message.chat.id
-    question_id = context.user_data["question_id"]
 
     await context.bot.send_message(
         chat_id=chat_id,
@@ -1003,7 +1002,7 @@ async def question_32 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 답은 15×4야~\n\n내가 잘 풀은걸까?🧐",
+        text="내가 생각한 답은 5×12야~\n\n내가 잘 풀은걸까?🧐",
         reply_markup=reply_markup
     )
 
