@@ -42,25 +42,18 @@ logger = logging.getLogger(__name__)
 # QUESTION_1_ADDED : 2 / QUESTION_2_ADDED : 4 / QUESTION_3_ADDED : 6 / QUESTION_4_ADDED : 8 / QUESTION_5_ADDED : 10
 START, QUESTION_1, QUESTION_1_ADDED, QUESTION_2, QUESTION_2_ADDED, QUESTION_3, QUESTION_3_ADDED, QUESTION_4, QUESTION_4_ADDED, QUESTION_5, QUESTION_5_ADDED = range(11)
 
+mode = "otc"
+
 async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
     chat_id = update.message.chat.id
 
-    args = (chat_id, "ot", context.user_data["question_id"], user.id, update.message.text)
+    args = (chat_id, mode, context.user_data["question_id"], user.first_name, update.message.text)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, cond, question_id, user_id, explanation) VALUES (%s, %s, %s, %s, %s)', args)
+    cursor.execute('INSERT INTO messages (chat_id, cond, question_id, user_identifier, explanation) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
-    if context.user_data["question_id"] == 1:
-        return QUESTION_1_ADDED
-    elif context.user_data["question_id"] == 2:
-        return QUESTION_2_ADDED
-    elif context.user_data["question_id"] == 3:
-        return QUESTION_3_ADDED
-    elif context.user_data["question_id"] == 4:
-        return QUESTION_4_ADDED
-    elif context.user_data["question_id"] == 5:
-        return QUESTION_5_ADDED
+    return 2 * context.user_data["question_id"]
 
 async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
@@ -232,9 +225,9 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, "otc", question_id, user.id)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.first_name)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_identifier) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
     answer_o_text = [

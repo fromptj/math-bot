@@ -48,7 +48,7 @@ async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     user = update.message.from_user
     chat_id = update.message.chat.id
 
-    args = (chat_id, "ot", context.user_data["question_id"], user.id, update.message.text)
+    args = (chat_id, mode, context.user_data["question_id"], user.id, update.message.text)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
     cursor.execute('INSERT INTO messages (chat_id, cond, question_id, user_id, explanation) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
@@ -109,8 +109,8 @@ async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
-    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.first_name)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_identifier) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
     await context.bot.send_message(
@@ -143,8 +143,8 @@ async def question_3 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
-    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.first_name)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_identifier) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
     await context.bot.send_message(
@@ -177,8 +177,8 @@ async def question_4 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
-    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.first_name)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_identifier) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
     await context.bot.send_message(
@@ -211,8 +211,8 @@ async def question_5 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, mode, question_id, user.id)
-    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.first_name)
+    cursor.execute('INSERT INTO messages (chat_id, explanation, cond, question_id, user_identifier) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
     await context.bot.send_message(
@@ -245,9 +245,9 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
 
-    args = (chat_id, update.callback_query.data, "la", question_id, user.id)
+    args = (chat_id, update.callback_query.data, mode, question_id, user.first_name)
     # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_id) VALUES (%s, %s, %s, %s, %s)', args)
+    cursor.execute('INSERT INTO messages (chat_id, ox, cond, question_id, user_identifier) VALUES (%s, %s, %s, %s, %s)', args)
     db.commit()
 
     answer_o_text = [
