@@ -28,7 +28,7 @@ from telegram.ext import (
 )
 
 # Connect database with chatbot and move on to chatbot database
-db = pymysql.connect(host="localhost", user="root", charset="utf8")
+db = pymysql.connect(host="localhost", user="root", charset="utf8mb4")
 cursor = db.cursor()
 cursor.execute('USE chatbot;')
 
@@ -103,6 +103,8 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     context.user_data["question_id"] = 1
 
     return QUESTION_1
+
+
 
 async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.callback_query.from_user
