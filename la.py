@@ -49,17 +49,30 @@ QUESTION_31, QUESTION_31_ADDED, QUESTION_32, QUESTION_32_ADDED, QUESTION_33, QUE
 
 mode = "la"
 
-async def explanation (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def jump_to (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
     chat_id = update.message.chat.id
 
-    args = (chat_id, mode, context.user_data["question_id"], user.id, update.message.text)
-    # logger.info("Answer of %s: %s", user.first_name, update.message.text)
-    cursor.execute('INSERT INTO messages (chat_id, cond, question_id, user_id, explanation) VALUES (%s, %s, %s, %s, %s)', args)
-    db.commit()
+    number_button = [[InlineKeyboardButton('1', callback_data='1'), InlineKeyboardButton('2', callback_data='2'), InlineKeyboardButton('3', callback_data='3'),  InlineKeyboardButton('4', callback_data='4'), InlineKeyboardButton('5', callback_data='5')],
+                     [InlineKeyboardButton('6', callback_data='6'), InlineKeyboardButton('7', callback_data='7'), InlineKeyboardButton('8', callback_data='8'),  InlineKeyboardButton('9', callback_data='9'), InlineKeyboardButton('10', callback_data='a')],
+                     [InlineKeyboardButton('11', callback_data='b'), InlineKeyboardButton('12', callback_data='c'), InlineKeyboardButton('13', callback_data='d'), InlineKeyboardButton('14', callback_data='e'), InlineKeyboardButton('15', callback_data='f')],
+                     [InlineKeyboardButton('16', callback_data='g'), InlineKeyboardButton('17', callback_data='h'), InlineKeyboardButton('18', callback_data='i'), InlineKeyboardButton('19', callback_data='j'), InlineKeyboardButton('20', callback_data='k')],
+                     [InlineKeyboardButton('21', callback_data='l'), InlineKeyboardButton('22', callback_data='m'), InlineKeyboardButton('23', callback_data='n'), InlineKeyboardButton('24', callback_data='o'), InlineKeyboardButton('25', callback_data='p')],
+                     [InlineKeyboardButton('26', callback_data='q'), InlineKeyboardButton('27', callback_data='r'), InlineKeyboardButton('28', callback_data='s'), InlineKeyboardButton('29', callback_data='t'), InlineKeyboardButton('30', callback_data='u')],
+                     [InlineKeyboardButton('31', callback_data='v'), InlineKeyboardButton('32', callback_data='w'), InlineKeyboardButton('33', callback_data='x'), InlineKeyboardButton('34', callback_data='y'), InlineKeyboardButton('35', callback_data='z')],
+                     ]
 
-    return 2 * context.user_data["question_id"]
+    reply_markup = InlineKeyboardMarkup(number_button)
 
+    await context.bot.send_message(
+        chat_id=chat_id,
+        text="시작할 문제 번호를 클릭해주세요",
+        reply_markup=reply_markup
+    )
+
+    context.user_data["question_id"] = 0
+
+    return 119
 
 async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
@@ -82,6 +95,8 @@ async def start (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         text='너도 준비가 되었다면, 아래 보이는 <준비됐어> 버튼을 클릭해줘!\n\n오늘 잘 부탁해!',
         reply_markup=reply_markup
     )
+
+    context.user_data["question_id"] = 0
 
     return START
 
@@ -115,6 +130,7 @@ async def question_1 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     return QUESTION_1
 
 async def question_2 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+
     user = update.callback_query.from_user
     chat_id = update.callback_query.message.chat.id
     question_id = context.user_data["question_id"]
@@ -1579,9 +1595,45 @@ if __name__ == '__main__':
         states={
             START: [
                 CallbackQueryHandler(question_1, pattern="^\s*준비됐어\s*"),
+                MessageHandler(filters.Regex("\s*번호\s*입력\s*"), jump_to),
                 MessageHandler(filters.Regex("^[^/cancel]"), warning)
-                # MessageHandler(filters.Regex("^\s*준비됐어\s*"), question_1),
-                # MessageHandler(filters.Regex("^[^/cancel]"), warning)
+            ],
+            119 : [
+                CallbackQueryHandler(question_1, pattern="1"),
+                CallbackQueryHandler(question_2, pattern="2"),
+                CallbackQueryHandler(question_3, pattern="3"),
+                CallbackQueryHandler(question_4, pattern="4"),
+                CallbackQueryHandler(question_5, pattern="5"),
+                CallbackQueryHandler(question_6, pattern="6"),
+                CallbackQueryHandler(question_7, pattern="7"),
+                CallbackQueryHandler(question_8, pattern="8"),
+                CallbackQueryHandler(question_9, pattern="9"),
+                CallbackQueryHandler(question_10, pattern="a"),
+                CallbackQueryHandler(question_11, pattern="b"),
+                CallbackQueryHandler(question_12, pattern="c"),
+                CallbackQueryHandler(question_13, pattern="d"),
+                CallbackQueryHandler(question_14, pattern="e"),
+                CallbackQueryHandler(question_15, pattern="f"),
+                CallbackQueryHandler(question_16, pattern="g"),
+                CallbackQueryHandler(question_17, pattern="h"),
+                CallbackQueryHandler(question_18, pattern="i"),
+                CallbackQueryHandler(question_19, pattern="j"),
+                CallbackQueryHandler(question_20, pattern="k"),
+                CallbackQueryHandler(question_21, pattern="l"),
+                CallbackQueryHandler(question_22, pattern="m"),
+                CallbackQueryHandler(question_23, pattern="n"),
+                CallbackQueryHandler(question_24, pattern="o"),
+                CallbackQueryHandler(question_25, pattern="p"),
+                CallbackQueryHandler(question_26, pattern="q"),
+                CallbackQueryHandler(question_27, pattern="r"),
+                CallbackQueryHandler(question_28, pattern="s"),
+                CallbackQueryHandler(question_29, pattern="t"),
+                CallbackQueryHandler(question_30, pattern="u"),
+                CallbackQueryHandler(question_31, pattern="v"),
+                CallbackQueryHandler(question_32, pattern="w"),
+                CallbackQueryHandler(question_33, pattern="x"),
+                CallbackQueryHandler(question_34, pattern="y"),
+                CallbackQueryHandler(question_35, pattern="z")
             ],
             QUESTION_1: [
                 CallbackQueryHandler(answer, pattern="^(맞|틀)"),
@@ -1821,7 +1873,7 @@ if __name__ == '__main__':
             ],
             QUESTION_30_ADDED: [
                 CallbackQueryHandler(question_31, pattern="^(1|2|3|4)"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_31: [
                 CallbackQueryHandler(answer, pattern="^(맞|틀)"),
