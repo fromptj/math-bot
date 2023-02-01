@@ -629,7 +629,7 @@ async def question_16 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 구한 식은\n\n(5+15)×6야!\n\n내 식에 대해 어떻게 생각해??",
+        text="내가 구한 식은\n\n(5+15)×6이야!\n\n내 식에 대해 어떻게 생각해??",
         reply_markup=reply_markup
     )
 

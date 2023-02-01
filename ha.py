@@ -1143,7 +1143,7 @@ async def question_30 (update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="내가 생각한 식은\n\n6×3야!!\n\n내가 잘 풀었다고 생각해~?",
+        text="내가 생각한 식은\n\n6×3이야!!\n\n내가 잘 풀었다고 생각해~?",
         reply_markup=reply_markup
     )
 
