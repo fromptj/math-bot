@@ -1932,7 +1932,7 @@ if __name__ == '__main__':
             ],
             QUESTION_30_ADDED: [
                 CallbackQueryHandler(question_31, pattern="^(1|2|3|4)"),
-                MessageHandler(filters.Regex("^[^/cancel]"), explanation)
+                MessageHandler(filters.Regex("^[^/cancel]"), warning)
             ],
             QUESTION_31: [
                 CallbackQueryHandler(answer, pattern="^(맞|틀)"),
